@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayush Vaidande | AI & Robotics Researcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --cyan-glow: 0 0 15px rgba(34, 211, 238, 0.6), 0 0 25px rgba(34, 211, 238, 0.4);
+            --electric-blue: #00ffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617; /* Even darker blue */
+            color: #e2e8f0; /* Lighter text for contrast */
+            overflow-x: hidden;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid var(--electric-blue);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .glassmorphism {
+            background: rgba(15, 23, 42, 0.6); /* Darker slate */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            transition: all 0.3s ease;
+        }
+        .glassmorphism:hover {
+            border-color: rgba(56, 189, 248, 0.7);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
+        }
+        .prose-custom {
+            color: #cbd5e1;
+        }
+        .prose-custom h3 {
+            color: #ffffff;
+            font-weight: 700;
+        }
+        .prose-custom p, .prose-custom ul {
+             margin-bottom: 1em;
+        }
+        .prose-custom ul {
+            list-style-position: inside;
+            padding-left: 0.5em;
+        }
+        .prose-custom li::marker {
+            color: var(--electric-blue);
+        }
+        .prose-custom strong {
+            color: #93c5fd;
+        }
+        .hero-glow {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-glow h1 {
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5), 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+        .hero-glow h2 {
+            text-shadow: 0 0 5px rgba(56, 189, 248, 0.5);
+        }
+        .section-bg {
+             background-image:
+                linear-gradient(rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.95) 100%),
+                radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.1), transparent 30%);
+            background-repeat: no-repeat;
+            border-radius: 1rem;
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-1 { animation: fadeIn 0.5s ease-out forwards; }
+        .fade-in-2 { animation: fadeIn 0.5s ease-out 0.2s forwards; }
+        .fade-in-3 { animation: fadeIn 0.5s ease-out 0.4s forwards; }
+        .fade-in-4 { animation: fadeIn 0.5s ease-out 0.6s forwards; }
+        
+        .skill-tag {
+            background: #1e293b;
+            border: 1px solid #334155;
+            transition: all 0.2s ease-in-out;
+        }
+        .skill-tag:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: var(--electric-blue);
+            border-color: var(--electric-blue);
+            color: #020617;
+            box-shadow: var(--cyan-glow);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+            text-shadow: 0 0 5px transparent;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--electric-blue);
+            transition: width 0.3s ease;
+            box-shadow: var(--cyan-glow);
+        }
+        .nav-link.active, .nav-link:hover {
+            color: var(--electric-blue);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+        .nav-link.active::after, .nav-link:hover::after {
+            width: 100%;
+        }
+        .contact-btn {
+             background: linear-gradient(90deg, #0ea5e9, #22d3ee);
+             transition: all 0.3s ease;
+             box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+        }
+        .contact-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--cyan-glow);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-300">
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Header & Navigation -->
+    <header class="bg-slate-900/50 backdrop-blur-lg sticky top-0 z-50 border-b border-sky-400/20">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-extrabold text-white tracking-tight hover:text-cyan-400 transition-colors duration-300" style="text-shadow: 0 0 8px rgba(0,255,255,0.5);">AV.</a>
+            <div id="desktop-nav" class="hidden md:flex space-x-8 items-center text-sm font-medium">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#contact" class="contact-btn text-slate-900 font-bold px-4 py-2 rounded-md">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white z-50">
+                <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+                 <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 backdrop-blur-lg absolute top-full left-0 w-full">
+            <div class="flex flex-col items-center space-y-4 py-8">
+                <a href="#about" class="nav-link-mobile hover:text-cyan-400 transition-colors duration-300 block">About</a>
+                <a href="#experience" class="nav-link-mobile hover:text-cyan-400 transition-colors duration-300 block">Experience</a>
+                <a href="#projects" class="nav-link-mobile hover:text-cyan-400 transition-colors duration-300 block">Projects</a>
+                <a href="#skills" class="nav-link-mobile hover:text-cyan-400 transition-colors duration-300 block">Skills</a>
+                <a href="#certifications" class="nav-link-mobile hover:text-cyan-400 transition-colors duration-300 block">Certifications</a>
+                <a href="#contact" class="nav-link-mobile hover:text-cyan-400 transition-colors duration-300 block">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 relative z-10">
+        <!-- Hero Section -->
+        <section id="home" class="text-center min-h-screen flex flex-col justify-center items-center hero-glow">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tighter fade-in-1 opacity-0">Ayush Vaidande</h1>
+            <h2 class="text-2xl md:text-4xl font-medium text-cyan-400 mb-6 fade-in-2 opacity-0">AI & Robotics Researcher @ IIT Mandi</h2>
+            <p class="max-w-3xl mx-auto text-slate-400 mb-8 leading-relaxed fade-in-3 opacity-0">
+                GATE 2025 (DS/AI) Qualified. Passionate about Deep Learning, NLP, and Computer Vision. Currently exploring new frontiers in AI and Robotics at the Centre for Artificial Intelligence & Robotics (CAIR).
+            </p>
+            <div class="flex justify-center space-x-6 fade-in-4 opacity-0">
+                <a href="https://www.linkedin.com/in/ayush-vaidande-383998218/" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-all duration-300 transform hover:scale-110">
+                    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://github.com/THEIOTGUY" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-all duration-300 transform hover:scale-110">
+                    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="mailto:vaidandeayush.av@gmail.com" class="text-slate-400 hover:text-cyan-400 transition-all duration-300 transform hover:scale-110">
+                     <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <section id="about" class="section-fade-in scroll-mt-20 section-bg">
+            <h2 class="text-3xl font-bold text-white text-center mb-16">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+                <div class="md:w-1/3 text-center">
+                    <img src="https://placehold.co/400x400/0B1120/94a3b8?text=AV" alt="Ayush Vaidande" class="rounded-full mx-auto w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-sky-500/50 shadow-2xl shadow-sky-500/20">
+                </div>
+                <div class="md:w-2/3">
+                    <p class="text-slate-400 leading-relaxed mb-4">
+                       Hello! I'm Ayush, a passionate Software Developer specializing in AI, ML, and Backend Engineering. With a Bachelor's degree in Electronics and Telecommunication (with honors in AI/ML), I have a strong foundation in Deep Learning, NLP, and Computer Vision.
+                    </p>
+                    <p class="text-slate-400 leading-relaxed mb-4">
+                        Currently, I am an AI & Robotics Researcher at the Centre for Artificial Intelligence & Robotics (CAIR) at IIT Mandi. Previously, at Yellow Sense Technologies, I developed cutting-edge Generative AI models and backend solutions. My expertise lies in building scalable and efficient AI-powered applications.
+                    </p>
+                     <p class="text-slate-400 leading-relaxed">
+                       I am driven by a passion for Large Language Models, AI research, and backend engineering, always eager to contribute to innovative solutions that push the boundaries of technology.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section-fade-in scroll-mt-20 section-bg">
+            <h2 class="text-3xl font-bold text-white text-center mb-16">Professional Experience</h2>
+            <div class="relative max-w-3xl mx-auto">
+                <div class="absolute left-4 md:left-1/2 w-0.5 h-full bg-sky-500/20"></div>
+                <!-- Timeline Item 1 -->
+                <div class="relative group mb-12">
+                    <div class="absolute w-4 h-4 bg-slate-700 rounded-full top-1 left-[9px] md:left-1/2 md:-translate-x-1/2 border-2 border-slate-900 group-hover:bg-cyan-400 transition-colors group-hover:shadow-[0_0_15px_rgba(34,211,238,0.8)]"></div>
+                    <div class="ml-10 md:ml-0 md:w-1/2 md:pr-8 md:text-right">
+                        <p class="text-sm text-slate-500">June 2025 - Present</p>
+                        <h3 class="text-xl font-semibold text-white mt-1">AI & Robotics Researcher</h3>
+                        <p class="text-md text-slate-400 mb-2">Centre for Artificial Intelligence and Robotics (CAIR), IIT Mandi</p>
+                    </div>
+                    <div class="ml-10 md:ml-auto md:w-1/2 md:pl-8 mt-4 md:mt-0">
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Currently engaged in advanced research and development in the fields of artificial intelligence and robotics.
+                        </p>
+                    </div>
+                </div>
+                <!-- Timeline Item 2 -->
+                <div class="relative group mb-12">
+                     <div class="absolute w-4 h-4 bg-slate-700 rounded-full top-1 left-[9px] md:left-1/2 md:-translate-x-1/2 border-2 border-slate-900 group-hover:bg-cyan-400 transition-colors group-hover:shadow-[0_0_15px_rgba(34,211,238,0.8)]"></div>
+                    <div class="ml-10 md:ml-0 md:w-1/2 md:pr-8 md:text-right">
+                        <p class="text-sm text-slate-500">Feb 2025 - May 2025</p>
+                        <h3 class="text-xl font-semibold text-white mt-1">AI ML and Backend Engineer</h3>
+                        <p class="text-md text-slate-400 mb-2">YellowSense Technologies</p>
+                    </div>
+                    <div class="ml-10 md:ml-auto md:w-1/2 md:pl-8 mt-4 md:mt-0">
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                           Developed Generative AI LLMs with TTS/STT capabilities for Indic languages. Built an AI-driven recommendation system and managed backend development, including database and API creation.
+                        </p>
+                    </div>
+                </div>
+                 <!-- Timeline Item 3 -->
+                <div class="relative group mb-12">
+                     <div class="absolute w-4 h-4 bg-slate-700 rounded-full top-1 left-[9px] md:left-1/2 md:-translate-x-1/2 border-2 border-slate-900 group-hover:bg-cyan-400 transition-colors group-hover:shadow-[0_0_15px_rgba(34,211,238,0.8)]"></div>
+                    <div class="ml-10 md:ml-0 md:w-1/2 md:pr-8 md:text-right">
+                        <p class="text-sm text-slate-500">June 2023 - July 2023</p>
+                        <h3 class="text-xl font-semibold text-white mt-1">Machine Learning Intern</h3>
+                        <p class="text-md text-slate-400 mb-2">Techno Hacks Edu Tech</p>
+                    </div>
+                    <div class="ml-10 md:ml-auto md:w-1/2 md:pl-8 mt-4 md:mt-0">
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                           Contributed to projects involving data preprocessing, model development, and collaborative problem-solving using Python and ML frameworks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section-fade-in scroll-mt-20 section-bg">
+            <h2 class="text-3xl font-bold text-white text-center mb-16">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="glassmorphism rounded-lg p-6 shadow-lg flex flex-col">
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold text-white mb-2" data-project-title>Generative AI for Indic Languages</h3>
+                        <p class="text-slate-400 mb-4 text-sm" data-project-desc>
+                            Developed cutting-edge Generative AI Large Language Models (LLMs) with text-to-speech (TTS) and speech-to-text (STT) capabilities for multiple Indic languages, including Hindi, Bengali, and Marathi. Also built an AI-driven recommendation system for household services.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-cyan-300">Generative AI</span>
+                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-cyan-300">LLM</span>
+                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-cyan-300">TTS/STT</span>
+                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-cyan-300">Backend</span>
+                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-cyan-300">Recommendation System</span>
+                        </div>
+                    </div>
+                    <div class="mt-auto pt-4 flex justify-between items-center">
+                         <a href="#" class="text-slate-500 font-semibold inline-flex items-center cursor-not-allowed text-sm">Private Codebase</a>
+                        <button class="ai-insights-btn bg-sky-500/20 text-sky-300 text-xs font-bold px-3 py-1.5 rounded-full hover:bg-sky-500/40 transition-colors">✨ Get AI Insights</button>
+                    </div>
+                </div>
+                 <!-- Project 2 -->
+                <div class="glassmorphism rounded-lg p-6 shadow-lg flex flex-col">
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold text-white mb-2" data-project-title>Therapy-LLM: Real-Time Therapy Assistant</h3>
+                        <p class="text-slate-400 mb-4 text-sm" data-project-desc>
+                            An AI-driven therapeutic system integrating Llama 2-7B with a fine-tuned model to deliver real-time, human-like responses, enhancing user experience in mental health support. This project was showcased at the IETE Project Exhibition.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-cyan-300">Python</span>
+                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-cyan-300">PyTorch</span>
+                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-cyan-300">LLM</span>
+                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-cyan-300">Fine-Tuning</span>
+                        </div>
+                    </div>
+                    <div class="mt-auto pt-4 flex justify-between items-center">
+                         <a href="https://github.com/THEIOTGUY/TherapyLLM" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold inline-flex items-center text-sm">
+                            View on GitHub <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                        </a>
+                        <button class="ai-insights-btn bg-sky-500/20 text-sky-300 text-xs font-bold px-3 py-1.5 rounded-full hover:bg-sky-500/40 transition-colors">✨ Get AI Insights</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills" class="section-fade-in scroll-mt-20 section-bg">
+            <h2 class="text-3xl font-bold text-white text-center mb-16">Technical Skills</h2>
+            <div class="max-w-4xl mx-auto space-y-12">
+                <div class="flex flex-col sm:flex-row gap-4 items-start">
+                    <h3 class="text-lg font-semibold text-white w-full sm:w-1/4">AI / ML</h3>
+                    <div class="flex flex-wrap gap-3 w-full sm:w-3/4">
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Artificial Intelligence</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Machine Learning</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Large Language Models</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Model Training & Fine-Tuning</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">NLP</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">PyTorch</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">OpenCV</span>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 items-start">
+                    <h3 class="text-lg font-semibold text-white w-full sm:w-1/4">Backend & Data</h3>
+                    <div class="flex flex-wrap gap-3 w-full sm:w-3/4">
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Back-End Web Development</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Data Analysis</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Python (Pandas, NumPy)</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">SQL</span>
+                    </div>
+                </div>
+                 <div class="flex flex-col sm:flex-row gap-4 items-start">
+                    <h3 class="text-lg font-semibold text-white w-full sm:w-1/4">Tools & Platforms</h3>
+                    <div class="flex flex-wrap gap-3 w-full sm:w-3/4">
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Tableau & Power BI</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Firebase</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">GCP</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Git & GitHub</span>
+                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Data Visualization</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="section-fade-in scroll-mt-20 section-bg">
+            <h2 class="text-3xl font-bold text-white text-center mb-16">Certifications</h2>
+            <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
+                <div class="glassmorphism rounded-lg p-6">
+                    <h3 class="font-semibold text-white">Perform Foundational Infrastructure Tasks in Google Cloud</h3>
+                    <p class="text-sm text-slate-400 mt-1">Google Cloud</p>
+                </div>
+                <div class="glassmorphism rounded-lg p-6">
+                    <h3 class="font-semibold text-white">Intro to Artificial Intelligence (AI)</h3>
+                    <p class="text-sm text-slate-400 mt-1">Coursera</p>
+                </div>
+                <div class="glassmorphism rounded-lg p-6">
+                    <h3 class="font-semibold text-white">GATE 2025 (DS/AI) Qualified</h3>
+                    <p class="text-sm text-slate-400 mt-1">Graduate Aptitude Test in Engineering</p>
+                </div>
+                <div class="glassmorphism rounded-lg p-6">
+                    <h3 class="font-semibold text-white">Google Cloud Big Data and Machine Learning Fundamentals</h3>
+                     <p class="text-sm text-slate-400 mt-1">Google Cloud</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-fade-in scroll-mt-20 section-bg">
+             <h2 class="text-3xl font-bold text-white text-center mb-4">Get In Touch</h2>
+             <p class="max-w-2xl mx-auto text-slate-400 mb-8">
+                 Have a question or want to discuss a project? Chat with my AI assistant below! It can answer questions about my experience and even help you draft an email to me.
+             </p>
+             <div id="ai-chat-container" class="max-w-2xl mx-auto glassmorphism rounded-lg shadow-lg p-4 text-left">
+                <div id="chat-box" class="h-80 overflow-y-auto mb-4 p-2 space-y-4">
+                    <!-- AI Welcome Message -->
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-cyan-500/80 flex items-center justify-center font-bold text-white flex-shrink-0 text-xs">AI</div>
+                        <div class="flex flex-col w-full max-w-xs leading-1.5 p-4 bg-slate-700 rounded-r-xl rounded-bl-xl">
+                            <p class="text-sm font-normal text-slate-300">Hello! I'm Ayush's AI assistant. How can I help you today? You can ask me about his projects, skills, or experience.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center border-t border-sky-400/20 pt-4">
+                    <input type="text" id="chat-input" class="flex-grow bg-slate-800 border border-slate-700 text-slate-300 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 p-2.5" placeholder="Ask about a project...">
+                    <button id="chat-send-btn" class="ml-2 contact-btn text-slate-900 font-bold p-2.5 rounded-lg">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-horizontal"><path d="m3 3 3 9-3 9 19-9Z"/><path d="M6 12h16"/></svg>
+                    </button>
+                </div>
+             </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-sky-400/20 mt-12">
+        <div class="container mx-auto px-6 py-6 text-center text-slate-500 text-sm">
+            <p>&copy; 2024 Ayush Vaidande. Designed & Built with a little help from AI.</p>
+        </div>
+    </footer>
+    
+    <!-- AI Insights Modal -->
+    <div id="ai-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden transition-opacity duration-300">
+        <div class="glassmorphism rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col border border-sky-500/50 shadow-sky-500/20">
+            <div class="p-6 border-b border-sky-400/20 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-white">✨ AI-Generated Project Insights</h3>
+                <button id="close-modal-btn" class="text-slate-400 hover:text-white">&times;</button>
+            </div>
+            <div id="modal-content" class="p-6 overflow-y-auto">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Interactive 3D Background ---
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const particles = 5000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particles * 3);
+
+            for(let i=0; i<particles*3; i++){
+                positions[i] = (Math.random() - 0.5) * 10;
+            }
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const material = new THREE.PointsMaterial({
+                size: 0.005,
+                color: 0x00ffff,
+                transparent: true,
+                opacity: 0.7
+            });
+            const particleSystem = new THREE.Points(geometry, material);
+            scene.add(particleSystem);
+            camera.position.z = 5;
+
+            let mouseX = 0, mouseY = 0;
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+                particleSystem.rotation.y += 0.0001;
+                particleSystem.rotation.x += 0.0001;
+
+                camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
+                camera.position.y += (mouseY * 0.5 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+                
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+
+            // --- Mobile Menu ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuOpenIcon = document.getElementById('menu-open-icon');
+            const menuCloseIcon = document.getElementById('menu-close-icon');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuOpenIcon.classList.toggle('hidden');
+                menuCloseIcon.classList.toggle('hidden');
+            });
+
+            // --- Smooth Scrolling & Active Nav Link ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+
+            const activateNavLink = (id) => {
+                if(!id) return;
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                });
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        activateNavLink(entry.target.id);
+                    }
+                });
+            }, { rootMargin: '-40% 0px -60% 0px' });
+
+            sections.forEach(section => {
+                if(section.id) sectionObserver.observe(section);
+            });
+            
+            const allNavLinks = [...navLinks, ...mobileNavLinks];
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.href.includes('#')) {
+                        e.preventDefault();
+                        const targetId = link.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                            menuOpenIcon.classList.remove('hidden');
+                            menuCloseIcon.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+
+            // --- Section Fade-in Animation ---
+            const fadeSections = document.querySelectorAll('.section-fade-in');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        fadeObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            fadeSections.forEach(section => { fadeObserver.observe(section); });
+
+            // --- Gemini API Integration ---
+            let apiKey = ""; // Canvas will provide this
+
+            const modal = document.getElementById('ai-modal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            document.querySelectorAll('.ai-insights-btn').forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    const projectCard = e.target.closest('.flex-col');
+                    const title = projectCard.querySelector('[data-project-title]').textContent;
+                    const description = projectCard.querySelector('[data-project-desc]').textContent;
+                    
+                    modal.classList.remove('hidden');
+                    modalContent.innerHTML = '<div class="flex justify-center items-center h-48"><div class="loader"></div></div>';
+
+                    const prompt = `
+                        You are a senior AI engineering manager reviewing a portfolio project. 
+                        Based on the project title and description below, provide a detailed analysis.
+                        Format your response in Markdown with clear headings.
+                        
+                        Include these sections:
+                        ### Potential Technical Architecture
+                        Suggest a plausible tech stack and architecture.
+                        
+                        ### Key Challenges
+                        Describe 2-3 technical or ethical challenges.
+                        
+                        ### Business Impact & Scalability
+                        Explain the business value and how it could scale.
+                        
+                        **Project Title:** ${title.trim()}
+                        **Description:** ${description.trim()}
+                    `;
+
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                    try {
+                        const payload = { contents: [{ parts: [{ text: prompt }] }] };
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`API call failed: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        const text = result.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate insights.";
+                        
+                        let html = text
+                            .replace(/### (.*)/g, '<h3 class="text-lg font-semibold text-white mt-4 mb-2">$1</h3>')
+                            .replace(/\*\*(.*)\*\*/g, '<strong>$1</strong>')
+                            .replace(/\* (.*)/g, '<li>$1</li>')
+                            .replace(/(\r\n|\n|\r)/gm, "<br>")
+                            .replace(/<br><li>/g, '<li>')
+                            .replace(/<\/li><br>/g, '</li>');
+
+                        html = html.replace(/<br>(<h3|<li)/g, '$1');
+                        html = html.replace(/(<li>.*<\/li>)/g, '<ul>$1</ul>');
+                        html = html.replace(/<\/ul><br><ul>/g, '');
+
+
+                        modalContent.innerHTML = `<div class="prose-custom">${html}</div>`;
+
+                    } catch (error) {
+                        console.error("Gemini API Error:", error);
+                        modalContent.innerHTML = `<p class="text-red-400">An error occurred. Please check the console.</p>`;
+                    }
+                });
+            });
+
+            closeModalBtn.addEventListener('click', () => { modal.classList.add('hidden'); });
+            modal.addEventListener('click', (e) => { if (e.target === modal) { modal.classList.add('hidden'); } });
+
+            const chatBox = document.getElementById('chat-box');
+            const chatInput = document.getElementById('chat-input');
+            const chatSendBtn = document.getElementById('chat-send-btn');
+            let chatHistory = [];
+            const portfolioContext = document.body.innerText;
+
+            const systemPrompt = `You are a friendly and professional AI assistant for Ayush Vaidande, an AI/ML Engineer. 
+            Your goal is to answer questions about Ayush's skills, experience, and projects based ONLY on the information provided in the portfolio context below.
+            You can also help visitors draft a professional email to him. 
+            Be concise and helpful. Do not invent any information. If you don't know the answer, say that you don't have that information but can help draft an email.
+
+            PORTFOLIO CONTEXT:
+            ---
+            ${portfolioContext.substring(0, 3000)}
+            ---
+            `;
+            
+            chatHistory.push({ role: "system", parts: [{ text: systemPrompt }] });
+
+            const handleChatSend = async () => {
+                const userMessage = chatInput.value.trim();
+                if (!userMessage) return;
+
+                chatBox.innerHTML += `
+                    <div class="flex items-start gap-3 justify-end">
+                        <div class="flex flex-col w-full max-w-xs leading-1.5 p-4 bg-cyan-600 rounded-l-xl rounded-br-xl">
+                            <p class="text-sm font-normal text-white">${userMessage}</p>
+                        </div>
+                    </div>`;
+                chatInput.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                chatBox.innerHTML += `
+                    <div class="flex items-start gap-3" id="ai-thinking">
+                        <div class="w-8 h-8 rounded-full bg-cyan-500/80 flex items-center justify-center font-bold text-white flex-shrink-0 text-xs">AI</div>
+                        <div class="flex flex-col w-full max-w-xs leading-1.5 p-4 bg-slate-700 rounded-r-xl rounded-bl-xl">
+                            <div class="flex space-x-1">
+                               <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-pulse delay-75"></span>
+                               <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-pulse delay-150"></span>
+                               <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-pulse delay-300"></span>
+                            </div>
+                        </div>
+                    </div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                const currentConversation = [{ role: "user", parts: [{ text: userMessage }] }];
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                try {
+                    const payload = { contents: [...chatHistory, ...currentConversation] };
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    if (!response.ok) throw new Error(`API Error: ${response.status}`);
+                    
+                    const result = await response.json();
+                    const aiMessage = result.candidates?.[0]?.content?.parts?.[0]?.text || "I'm having trouble connecting.";
+
+                    chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
+                    chatHistory.push({ role: "model", parts: [{ text: aiMessage }] });
+                    
+                    document.getElementById('ai-thinking').remove();
+                    chatBox.innerHTML += `
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-cyan-500/80 flex items-center justify-center font-bold text-white flex-shrink-0 text-xs">AI</div>
+                            <div class="flex flex-col w-full max-w-xs leading-1.5 p-4 bg-slate-700 rounded-r-xl rounded-bl-xl">
+                                <p class="text-sm font-normal text-slate-300">${aiMessage}</p>
+                            </div>
+                        </div>`;
+
+                } catch(error) {
+                     document.getElementById('ai-thinking').remove();
+                     chatBox.innerHTML += `
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-cyan-500/80 flex items-center justify-center font-bold text-white flex-shrink-0 text-xs">AI</div>
+                            <div class="flex flex-col w-full max-w-xs leading-1.5 p-4 bg-red-900/50 rounded-r-xl rounded-bl-xl">
+                                <p class="text-sm font-normal text-red-300">Sorry, an error occurred. Please try again.</p>
+                            </div>
+                        </div>`;
+                    console.error("Chatbot Error:", error);
+                }
+                 chatBox.scrollTop = chatBox.scrollHeight;
+            };
+
+            chatSendBtn.addEventListener('click', handleChatSend);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleChatSend();
+            });
+        });
+    </script>
+</body>
+</html>
+
