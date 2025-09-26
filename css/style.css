@@ -1,0 +1,219 @@
+:root {
+    --celestial-blue: #38bdf8; /* Tailwind sky-400 */
+    --celestial-glow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 25px rgba(56, 189, 248, 0.4);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #020617; /* slate-950 */
+    color: #e2e8f0; /* slate-200 */
+    overflow-x: hidden;
+}
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.section-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.section-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.loader {
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid var(--celestial-blue);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.glassmorphism {
+    background: rgba(15, 23, 42, 0.5); /* slate-900/50 */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    transition: all 0.3s ease;
+}
+.glassmorphism:hover {
+    border-color: rgba(56, 189, 248, 0.7);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
+}
+.prose-custom {
+    color: #cbd5e1; /* slate-300 */
+}
+.prose-custom h3 {
+    color: #ffffff;
+    font-weight: 700;
+}
+.prose-custom p, .prose-custom ul {
+     margin-bottom: 1em;
+}
+.prose-custom ul {
+    list-style-position: inside;
+    padding-left: 0.5em;
+}
+.prose-custom li::marker {
+    color: var(--celestial-blue);
+}
+.prose-custom strong {
+    color: var(--celestial-blue);
+}
+.hero-glow {
+    position: relative;
+    z-index: 1;
+}
+.hero-glow h1 {
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5), 0 0 20px rgba(56, 189, 248, 0.3);
+}
+.hero-glow h2 {
+     color: var(--celestial-blue);
+     text-shadow: 0 0 5px rgba(56, 189, 248, 0.5);
+}
+.section-bg {
+     /* This style is no longer used to create distinct blocks, but we can keep it for potential future use or remove it. For now, we'll make sections transparent. */
+    background: transparent;
+    border: none;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-in-1 { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
+.fade-in-2 { animation: fadeIn 0.5s ease-out 0.2s forwards; opacity: 0; }
+.fade-in-3 { animation: fadeIn 0.5s ease-out 0.4s forwards; opacity: 0; }
+.fade-in-4 { animation: fadeIn 0.5s ease-out 0.6s forwards; opacity: 0; }
+
+.skill-tag {
+    background: #1e293b; /* slate-800 */
+    border: 1px solid #334155; /* slate-700 */
+    transition: all 0.2s ease-in-out;
+}
+.skill-tag:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: var(--celestial-blue);
+    border-color: var(--celestial-blue);
+    color: #020617; /* slate-950 */
+    box-shadow: var(--celestial-glow);
+}
+
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+    text-shadow: 0 0 5px transparent;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--celestial-blue);
+    transition: width 0.3s ease;
+    box-shadow: var(--celestial-glow);
+}
+.nav-link.active, .nav-link:hover {
+    color: var(--celestial-blue);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+}
+.nav-link.active::after, .nav-link:hover::after {
+    width: 100%;
+}
+.contact-btn {
+     background: linear-gradient(90deg, #0ea5e9, #38bdf8); /* sky-500 to sky-400 */
+     transition: all 0.3s ease;
+     box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+.contact-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--celestial-glow);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0f172a; /* slate-900 */
+}
+::-webkit-scrollbar-thumb {
+    background: var(--celestial-blue);
+    border-radius: 4px;
+    border: 1px solid #0f172a;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #0ea5e9; /* sky-500 */
+}
+
+/* Custom Cursor */
+body {
+    cursor: none;
+}
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--celestial-blue);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease-out;
+    z-index: 10000;
+    mix-blend-mode: difference;
+}
+
+.custom-cursor.pointer {
+    width: 48px;
+    height: 48px;
+    background-color: var(--celestial-blue);
+    opacity: 0.3;
+}
+
+/* Social Icon Hover Effect */
+.social-icon {
+    position: relative;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.social-icon:hover {
+    transform: translateY(-5px);
+    color: var(--celestial-blue);
+}
+.social-icon::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--celestial-blue);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: var(--celestial-glow);
+}
+.social-icon:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(5px);
+}
