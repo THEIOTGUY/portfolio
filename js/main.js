@@ -311,6 +311,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.1 });
     fadeSections.forEach(section => { fadeObserver.observe(section); });
 
+    // --- Timeline Animation ---
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const timelineObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 150);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    timelineItems.forEach(item => {
+        timelineObserver.observe(item);
+    });
+
     // --- Gemini API Integration ---
     let apiKey = ""; // Canvas will provide this
 
@@ -401,6 +417,31 @@ document.addEventListener('DOMContentLoaded', () => {
             el.addEventListener('mouseout', () => {
                 cursor.classList.remove('pointer');
             });
+        });
+    }
+
+    // --- Contact Form ---
+    const contactForm = document.getElementById('contact-form');
+    const formFeedback = document.getElementById('form-feedback');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+
+            // Simulate sending
+            formFeedback.textContent = 'Sending...';
+            formFeedback.classList.add('text-sky-400');
+            formFeedback.classList.remove('text-green-400', 'text-red-400');
+            submitButton.disabled = true;
+
+            setTimeout(() => {
+                // Simulate success
+                formFeedback.textContent = 'Thank you for your message! I\'ll get back to you soon.';
+                formFeedback.classList.add('text-green-400');
+                formFeedback.classList.remove('text-sky-400');
+                contactForm.reset();
+                submitButton.disabled = false;
+            }, 1500);
         });
     }
 });
