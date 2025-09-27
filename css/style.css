@@ -48,8 +48,9 @@ body {
     transition: all 0.3s ease;
 }
 .glassmorphism:hover {
+    transform: translateY(-5px);
     border-color: rgba(56, 189, 248, 0.7);
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
+    box-shadow: 0 8px 30px rgba(56, 189, 248, 0.2), 0 0 25px rgba(56, 189, 248, 0.3);
 }
 .prose-custom {
     color: #cbd5e1; /* slate-300 */
@@ -216,4 +217,29 @@ body {
 .social-icon:hover::after {
     opacity: 1;
     transform: translateX(-50%) translateY(5px);
+}
+
+/* Screen-reader only utility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Experience Timeline Animation */
+.timeline-item {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
