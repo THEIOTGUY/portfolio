@@ -1,331 +1,309 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayush Vaidande | AI & Robotics Researcher</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='sans-serif' fill='%2338bdf8'>AV</text></svg>">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Ayush Vaidande — AI & Robotics Researcher</title>
+    <meta name="description" content="Ayush Vaidande is an AI & Robotics researcher at CAIR, IIT Mandi, working on large language models, speech, and computer vision.">
+    <meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0e0e0c" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ff5b1f'/><text x='50' y='68' text-anchor='middle' font-size='52' font-family='Georgia,serif' font-style='italic' fill='%23fff'>av</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Apply saved theme before paint to avoid a flash
+        document.documentElement.classList.add('js');
+        try {
+            const t = localStorage.getItem('theme');
+            if (t) document.documentElement.dataset.theme = t;
+        } catch (e) {}
+    </script>
 </head>
-<body class="bg-slate-950 text-slate-300">
-    <div class="custom-cursor"></div>
-    <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 bg-slate-950 z-[100] flex flex-col justify-center items-center transition-opacity duration-500">
-        <div class="loader"></div>
-        <p class="text-sky-400 mt-4 text-lg font-medium">Summoning the Cosmos...</p>
-    </div>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <canvas id="bg-canvas"></canvas>
+    <!-- Header -->
+    <header class="site-header" id="top">
+        <div class="wrap header-inner">
+            <a href="#top" class="brand" aria-label="Ayush Vaidande — home">
+                <span class="brand-mark">av</span>
+                <span class="brand-name">Ayush Vaidande</span>
+            </a>
 
-    <!-- Header & Navigation -->
-    <header class="bg-slate-950/50 backdrop-blur-lg sticky top-0 z-50 border-b border-sky-500/20">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-extrabold text-white tracking-tight hover:text-sky-400 transition-colors duration-300" style="text-shadow: 0 0 8px rgba(56, 189, 248,0.5);">AV.</a>
-            <div id="desktop-nav" class="hidden md:flex space-x-8 items-center text-sm font-medium">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#certifications" class="nav-link">Certifications</a>
-                <a href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" class="nav-link">Resume</a>
-                <a href="#contact" class="contact-btn text-white font-bold px-4 py-2 rounded-md">Contact</a>
-            </div>
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-white z-50" aria-label="Open menu">
-                <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-                 <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-950/95 backdrop-blur-lg absolute top-full left-0 w-full">
-            <div class="flex flex-col items-center space-y-6 py-8">
-                <a href="#about" class="nav-link text-lg">About</a>
-                <a href="#experience" class="nav-link text-lg">Experience</a>
-                <a href="#projects" class="nav-link text-lg">Projects</a>
-                <a href="#skills" class="nav-link text-lg">Skills</a>
-                <a href="#certifications" class="nav-link text-lg">Certifications</a>
-                <a href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" class="nav-link text-lg">Resume</a>
-                <a href="#contact" class="nav-link text-lg">Contact</a>
+            <nav class="nav" id="nav" aria-label="Primary">
+                <a href="#about" class="nav-link"><span class="nav-num">01</span>About</a>
+                <a href="#experience" class="nav-link"><span class="nav-num">02</span>Experience</a>
+                <a href="#projects" class="nav-link"><span class="nav-num">03</span>Projects</a>
+                <a href="#skills" class="nav-link"><span class="nav-num">04</span>Skills</a>
+                <a href="#contact" class="nav-link"><span class="nav-num">05</span>Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle colour theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></svg>
+                </button>
+                <a class="btn btn-small" href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
+                <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+                    <span></span><span></span>
+                </button>
             </div>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 relative z-10">
-        <!-- Hero Section -->
-        <section id="home" class="text-center min-h-screen flex flex-col justify-center items-center hero-glow">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tighter fade-in-1">Ayush Vaidande</h1>
-            <h2 class="text-2xl md:text-4xl font-medium mb-6 fade-in-2">AI & Robotics Researcher @ IIT Mandi</h2>
-            <p class="max-w-3xl mx-auto text-slate-400 mb-8 leading-relaxed fade-in-3">
-                GATE 2024 (DS/AI) Qualified. Passionate about Deep Learning, NLP, and Computer Vision. Currently exploring new frontiers in AI and Robotics at the Centre for Artificial Intelligence & Robotics (CAIR).
-            </p>
-            <div class="flex flex-wrap justify-center items-center gap-6 fade-in-4">
-                 <a href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" class="contact-btn inline-flex items-center text-white font-bold px-6 py-3 rounded-md transition-transform duration-300 hover:scale-105">
-                    View My Resume
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                </a>
-                <div class="flex justify-center space-x-6">
-                    <a href="https://www.linkedin.com/in/ayush-vaidande-383998218/" target="_blank" class="social-icon text-slate-400 transition-all duration-300">
-                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    </a>
-                    <a href="https://github.com/THEIOTGUY" target="_blank" class="social-icon text-slate-400 transition-all duration-300">
-                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    </a>
-                    <a href="mailto:vaidandeayush.av@gmail.com" class="social-icon text-slate-400 transition-all duration-300">
-                         <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-                    </a>
+    <main id="main">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="wrap hero-grid">
+                <div class="hero-copy">
+                    <p class="status reveal">
+                        <span class="pulse" aria-hidden="true"></span>
+                        Currently — Researcher at CAIR, IIT Mandi
+                    </p>
+                    <h1 class="hero-title reveal">
+                        Teaching machines to <em>see</em>, <em>listen</em> &amp; <em>reason</em>.
+                    </h1>
+                    <p class="hero-lede reveal">
+                        I'm <strong>Ayush Vaidande</strong>, an AI &amp; Robotics researcher working at the intersection of
+                        large language models, speech and computer vision — and the backend systems that ship them.
+                    </p>
+                    <div class="hero-cta reveal">
+                        <a href="#projects" class="btn btn-primary">See selected work <span aria-hidden="true">→</span></a>
+                        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+                    </div>
+                </div>
+
+                <figure class="hero-visual reveal" aria-hidden="true">
+                    <canvas id="scan"></canvas>
+                    <figcaption class="scan-caption">
+                        <span>fig. 0 — point cloud</span>
+                        <span id="scan-count">n = 0</span>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="wrap">
+                <dl class="hero-meta reveal">
+                    <div><dt>Based in</dt><dd>Mandi, India</dd></div>
+                    <div><dt>Focus</dt><dd>LLMs · Speech · Vision</dd></div>
+                    <div><dt>Credential</dt><dd>GATE 2024 · DS &amp; AI</dd></div>
+                    <div><dt>Open to</dt><dd>Research &amp; ML roles</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="section" id="about">
+            <div class="wrap section-grid">
+                <header class="section-head reveal">
+                    <span class="section-num">01</span>
+                    <h2 class="section-title">About</h2>
+                </header>
+                <div class="section-body">
+                    <p class="lead reveal">
+                        I build AI systems that work outside the notebook — models that understand
+                        Indic languages, assistants that respond in real time, and the infrastructure
+                        that keeps them running.
+                    </p>
+                    <div class="two-col reveal">
+                        <p>
+                            I hold a Bachelor's in Electronics &amp; Telecommunication with honours in AI/ML,
+                            which gave me a foundation that spans signals and hardware as much as deep learning.
+                            Today I'm a researcher at the Centre for Artificial Intelligence &amp; Robotics (CAIR),
+                            IIT Mandi.
+                        </p>
+                        <p>
+                            Before that, at YellowSense Technologies, I developed generative models with
+                            speech-to-text and text-to-speech for Hindi, Bengali and Marathi, alongside the
+                            APIs and databases behind them. I'm most drawn to LLMs, applied research and
+                            well-engineered backends.
+                        </p>
+                    </div>
+                    <ul class="facts reveal">
+                        <li><span class="fact-k">Education</span><span class="fact-v">B.E. E&amp;TC, Honours in AI/ML</span></li>
+                        <li><span class="fact-k">Languages</span><span class="fact-v">Python, SQL</span></li>
+                        <li><span class="fact-k">Frameworks</span><span class="fact-v">PyTorch, OpenCV, Pandas, NumPy</span></li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="section-fade-in scroll-mt-20 py-24">
-            <h2 class="text-3xl font-bold text-white text-center mb-16">About Me</h2>
-            <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16 max-w-5xl mx-auto">
-                <div class="md:w-1/3 text-center">
-                    <img src="https://placehold.co/400x400/0B1120/38bdf8?text=AV" alt="Photograph of Ayush Vaidande" class="rounded-full mx-auto w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-sky-500/50 shadow-2xl shadow-sky-500/20">
-                </div>
-                <div class="md:w-2/3">
-                    <p class="text-slate-400 leading-relaxed mb-4">
-                        Hello! I'm Ayush, a passionate Software Developer specializing in AI, ML, and Backend Engineering. With a Bachelor's degree in Electronics and Telecommunication (with honors in AI/ML), I have a strong foundation in Deep Learning, NLP, and Computer Vision.
-                    </p>
-                    <p class="text-slate-400 leading-relaxed mb-4">
-                        Currently, I am an AI & Robotics Researcher at the Centre for Artificial Intelligence & Robotics (CAIR) at IIT Mandi. Previously, at Yellow Sense Technologies, I developed cutting-edge Generative AI models and backend solutions. My expertise lies in building scalable and efficient AI-powered applications.
-                    </p>
-                     <p class="text-slate-400 leading-relaxed">
-                        I am driven by a passion for Large Language Models, AI research, and backend engineering, always eager to contribute to innovative solutions that push the boundaries of technology.
-                    </p>
+        <!-- Experience -->
+        <section class="section" id="experience">
+            <div class="wrap section-grid">
+                <header class="section-head reveal">
+                    <span class="section-num">02</span>
+                    <h2 class="section-title">Experience</h2>
+                </header>
+                <ol class="section-body timeline">
+                    <li class="job reveal">
+                        <div class="job-when">Jun 2024 — <span class="now">Present</span></div>
+                        <div class="job-what">
+                            <h3>AI &amp; Robotics Researcher</h3>
+                            <p class="job-org">Centre for Artificial Intelligence &amp; Robotics, IIT Mandi</p>
+                            <p>Research and development across artificial intelligence and robotics.</p>
+                        </div>
+                    </li>
+                    <li class="job reveal">
+                        <div class="job-when">Feb 2024 — May 2024</div>
+                        <div class="job-what">
+                            <h3>AI/ML &amp; Backend Engineer</h3>
+                            <p class="job-org">YellowSense Technologies</p>
+                            <p>Built generative LLMs with TTS/STT for Indic languages, an AI-driven recommendation system for household services, and the backend — databases and APIs — to serve them.</p>
+                        </div>
+                    </li>
+                    <li class="job reveal">
+                        <div class="job-when">Jun 2023 — Jul 2023</div>
+                        <div class="job-what">
+                            <h3>Machine Learning Intern</h3>
+                            <p class="job-org">Techno Hacks Edu Tech</p>
+                            <p>Data preprocessing, model development and collaborative problem-solving with Python and ML frameworks.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section" id="projects">
+            <div class="wrap section-grid">
+                <header class="section-head reveal">
+                    <span class="section-num">03</span>
+                    <h2 class="section-title">Selected work</h2>
+                </header>
+                <div class="section-body projects">
+                    <article class="project reveal">
+                        <div class="project-art" aria-hidden="true">
+                            <svg viewBox="0 0 400 240" preserveAspectRatio="none">
+                                <g class="wave">
+                                    <path d="M0 120 Q 25 40 50 120 T 100 120 T 150 120 T 200 120 T 250 120 T 300 120 T 350 120 T 400 120"/>
+                                    <path d="M0 120 Q 25 80 50 120 T 100 120 T 150 120 T 200 120 T 250 120 T 300 120 T 350 120 T 400 120"/>
+                                    <path d="M0 120 Q 25 180 50 120 T 100 120 T 150 120 T 200 120 T 250 120 T 300 120 T 350 120 T 400 120"/>
+                                </g>
+                                <text x="20" y="40">हिन्दी</text>
+                                <text x="170" y="210">বাংলা</text>
+                                <text x="300" y="50">मराठी</text>
+                            </svg>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-idx">P—01 · YellowSense · 2024</p>
+                            <h3>Generative AI for Indic Languages</h3>
+                            <p>LLMs with speech-to-text and text-to-speech for Hindi, Bengali and Marathi, paired with an AI-driven recommendation engine for household services.</p>
+                            <ul class="tags">
+                                <li>Generative AI</li><li>LLM</li><li>TTS / STT</li><li>RecSys</li><li>Backend</li>
+                            </ul>
+                            <p class="project-link muted">Private codebase</p>
+                        </div>
+                    </article>
+
+                    <article class="project reveal">
+                        <div class="project-art" aria-hidden="true">
+                            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
+                                <g class="bubbles">
+                                    <rect x="30" y="40" width="180" height="40" rx="20"/>
+                                    <rect x="190" y="100" width="180" height="40" rx="20" class="accent"/>
+                                    <rect x="30" y="160" width="130" height="40" rx="20"/>
+                                </g>
+                                <g class="dots">
+                                    <circle cx="185" cy="180" r="5"/><circle cx="205" cy="180" r="5"/><circle cx="225" cy="180" r="5"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-idx">P—02 · Exhibited at IETE · 2023</p>
+                            <h3>Therapy-LLM</h3>
+                            <p>A real-time therapy assistant that pairs Llama 2-7B with a fine-tuned model to deliver empathetic, human-like responses for mental-health support.</p>
+                            <ul class="tags">
+                                <li>Python</li><li>PyTorch</li><li>Llama 2</li><li>Fine-tuning</li>
+                            </ul>
+                            <a class="project-link" href="https://github.com/THEIOTGUY/TherapyLLM" target="_blank" rel="noopener">View on GitHub <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <section id="experience" class="section-fade-in scroll-mt-20 py-24">
-            <h2 class="text-3xl font-bold text-white text-center mb-16">Professional Experience</h2>
-            <div class="relative max-w-3xl mx-auto">
-                <div class="absolute left-4 md:left-1/2 w-0.5 h-full bg-sky-500/20"></div>
-                <!-- Timeline Item 1 -->
-                <div class="relative group mb-12 timeline-item">
-                    <div class="absolute w-4 h-4 bg-slate-700 rounded-full top-1 left-[9px] md:left-1/2 md:-translate-x-1/2 border-2 border-slate-900 group-hover:bg-sky-400 transition-colors group-hover:shadow-[0_0_15px_rgba(56,189,248,0.8)]"></div>
-                    <div class="ml-10 md:ml-0 md:w-1/2 md:pr-8 md:text-right">
-                        <p class="text-sm text-slate-500">June 2024 - Present</p>
-                        <h3 class="text-xl font-semibold text-white mt-1">AI & Robotics Researcher</h3>
-                        <p class="text-md text-slate-400 mb-2">Centre for Artificial Intelligence and Robotics (CAIR), IIT Mandi</p>
-                    </div>
-                    <div class="ml-10 md:ml-auto md:w-1/2 md:pl-8 mt-4 md:mt-0">
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Currently engaged in advanced research and development in the fields of artificial intelligence and robotics.
-                        </p>
-                    </div>
-                </div>
-                <!-- Timeline Item 2 -->
-                <div class="relative group mb-12 timeline-item">
-                     <div class="absolute w-4 h-4 bg-slate-700 rounded-full top-1 left-[9px] md:left-1/2 md:-translate-x-1/2 border-2 border-slate-900 group-hover:bg-sky-400 transition-colors group-hover:shadow-[0_0_15px_rgba(56,189,248,0.8)]"></div>
-                    <div class="ml-10 md:ml-0 md:w-1/2 md:pr-8 md:text-right">
-                        <p class="text-sm text-slate-500">Feb 2024 - May 2024</p>
-                        <h3 class="text-xl font-semibold text-white mt-1">AI ML and Backend Engineer</h3>
-                        <p class="text-md text-slate-400 mb-2">YellowSense Technologies</p>
-                    </div>
-                    <div class="ml-10 md:ml-auto md:w-1/2 md:pl-8 mt-4 md:mt-0">
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Developed Generative AI LLMs with TTS/STT capabilities for Indic languages. Built an AI-driven recommendation system and managed backend development, including database and API creation.
-                        </p>
-                    </div>
-                </div>
-                 <!-- Timeline Item 3 -->
-                <div class="relative group mb-12 timeline-item">
-                     <div class="absolute w-4 h-4 bg-slate-700 rounded-full top-1 left-[9px] md:left-1/2 md:-translate-x-1/2 border-2 border-slate-900 group-hover:bg-sky-400 transition-colors group-hover:shadow-[0_0_15px_rgba(56,189,248,0.8)]"></div>
-                    <div class="ml-10 md:ml-0 md:w-1/2 md:pr-8 md:text-right">
-                        <p class="text-sm text-slate-500">June 2023 - July 2023</p>
-                        <h3 class="text-xl font-semibold text-white mt-1">Machine Learning Intern</h3>
-                        <p class="text-md text-slate-400 mb-2">Techno Hacks Edu Tech</p>
-                    </div>
-                    <div class="ml-10 md:ml-auto md:w-1/2 md:pl-8 mt-4 md:mt-0">
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Contributed to projects involving data preprocessing, model development, and collaborative problem-solving using Python and ML frameworks.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="section-fade-in scroll-mt-20 py-24">
-            <h2 class="text-3xl font-bold text-white text-center mb-16">Featured Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <!-- Project 1 -->
-                <div class="glassmorphism rounded-lg p-6 shadow-lg flex flex-col">
-                    <div class="flex-grow">
-                        <h3 class="text-xl font-bold text-white mb-2" data-project-title>Generative AI for Indic Languages</h3>
-                        <p class="text-slate-400 mb-4 text-sm" data-project-desc>
-                            Developed cutting-edge Generative AI Large Language Models (LLMs) with text-to-speech (TTS) and speech-to-text (STT) capabilities for multiple Indic languages, including Hindi, Bengali, and Marathi. Also built an AI-driven recommendation system for household services.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-sky-300">Generative AI</span>
-                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-sky-300">LLM</span>
-                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-sky-300">TTS/STT</span>
-                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-sky-300">Backend</span>
-                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-sky-300">Recommendation System</span>
+        <!-- Skills -->
+        <section class="section" id="skills">
+            <div class="wrap section-grid">
+                <header class="section-head reveal">
+                    <span class="section-num">04</span>
+                    <h2 class="section-title">Toolkit</h2>
+                </header>
+                <div class="section-body">
+                    <div class="skills">
+                        <div class="skill-group reveal">
+                            <h3>AI / ML</h3>
+                            <ul>
+                                <li>Large Language Models</li>
+                                <li>Training &amp; fine-tuning</li>
+                                <li>Natural Language Processing</li>
+                                <li>Computer Vision</li>
+                                <li>PyTorch</li>
+                                <li>OpenCV</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group reveal">
+                            <h3>Backend &amp; Data</h3>
+                            <ul>
+                                <li>API &amp; backend development</li>
+                                <li>Python · Pandas · NumPy</li>
+                                <li>SQL</li>
+                                <li>Data analysis</li>
+                            </ul>
+                        </div>
+                        <div class="skill-group reveal">
+                            <h3>Platforms</h3>
+                            <ul>
+                                <li>Google Cloud Platform</li>
+                                <li>Firebase</li>
+                                <li>Git &amp; GitHub</li>
+                                <li>Tableau · Power BI</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="mt-auto pt-4 flex justify-between items-center">
-                         <a href="#" class="text-slate-500 font-semibold inline-flex items-center cursor-not-allowed text-sm">Private Codebase</a>
-                        <button class="ai-insights-btn bg-sky-500/20 text-sky-300 text-xs font-bold px-3 py-1.5 rounded-full hover:bg-sky-500/40 transition-colors">✨ Get AI Insights</button>
-                    </div>
-                </div>
-                 <!-- Project 2 -->
-                <div class="glassmorphism rounded-lg p-6 shadow-lg flex flex-col">
-                    <div class="flex-grow">
-                        <h3 class="text-xl font-bold text-white mb-2" data-project-title>Therapy-LLM: Real-Time Therapy Assistant</h3>
-                        <p class="text-slate-400 mb-4 text-sm" data-project-desc>
-                            An AI-driven therapeutic system integrating Llama 2-7B with a fine-tuned model to deliver real-time, human-like responses, enhancing user experience in mental health support. This project was showcased at the IETE Project Exhibition.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-sky-300">Python</span>
-                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-sky-300">PyTorch</span>
-                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-sky-300">LLM</span>
-                            <span class="bg-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full text-sky-300">Fine-Tuning</span>
-                        </div>
-                    </div>
-                    <div class="mt-auto pt-4 flex justify-between items-center">
-                         <a href="https://github.com/THEIOTGUY/TherapyLLM" target="_blank" class="text-sky-400 hover:text-sky-300 font-semibold inline-flex items-center text-sm">
-                            View on GitHub <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                        </a>
-                        <button class="ai-insights-btn bg-sky-500/20 text-sky-300 text-xs font-bold px-3 py-1.5 rounded-full hover:bg-sky-500/40 transition-colors">✨ Get AI Insights</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="skills" class="section-fade-in scroll-mt-20 py-24">
-            <h2 class="text-3xl font-bold text-white text-center mb-16">Technical Skills</h2>
-            <div class="max-w-4xl mx-auto space-y-12">
-                <div class="flex flex-col sm:flex-row gap-4 items-start">
-                    <h3 class="text-lg font-semibold text-white w-full sm:w-1/4">AI / ML</h3>
-                    <div class="flex flex-wrap gap-3 w-full sm:w-3/4">
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Artificial Intelligence</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Machine Learning</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Large Language Models</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Model Training & Fine-Tuning</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">NLP</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">PyTorch</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">OpenCV</span>
-                    </div>
-                </div>
-                <div class="flex flex-col sm:flex-row gap-4 items-start">
-                    <h3 class="text-lg font-semibold text-white w-full sm:w-1/4">Backend & Data</h3>
-                    <div class="flex flex-wrap gap-3 w-full sm:w-3/4">
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Back-End Web Development</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Data Analysis</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Python (Pandas, NumPy)</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">SQL</span>
-                    </div>
-                </div>
-                 <div class="flex flex-col sm:flex-row gap-4 items-start">
-                    <h3 class="text-lg font-semibold text-white w-full sm:w-1/4">Tools & Platforms</h3>
-                    <div class="flex flex-wrap gap-3 w-full sm:w-3/4">
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Tableau & Power BI</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Firebase</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">GCP</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Git & GitHub</span>
-                         <span class="skill-tag text-slate-300 px-4 py-2 rounded-lg text-sm font-medium">Data Visualization</span>
-                    </div>
+
+                    <h3 class="sub-head reveal">Certifications</h3>
+                    <ul class="certs">
+                        <li class="reveal"><span>GATE 2024 — Data Science &amp; AI (Qualified)</span><span class="cert-src">IISc Bangalore</span></li>
+                        <li class="reveal"><span>Big Data &amp; Machine Learning Fundamentals</span><span class="cert-src">Google Cloud</span></li>
+                        <li class="reveal"><span>Perform Foundational Infrastructure Tasks</span><span class="cert-src">Google Cloud</span></li>
+                        <li class="reveal"><span>Introduction to Artificial Intelligence</span><span class="cert-src">Coursera</span></li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <section id="certifications" class="section-fade-in scroll-mt-20 py-24">
-            <h2 class="text-3xl font-bold text-white text-center mb-16">Certifications</h2>
-            <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
-                <div class="glassmorphism rounded-lg p-6">
-                    <h3 class="font-semibold text-white">Perform Foundational Infrastructure Tasks in Google Cloud</h3>
-                    <p class="text-sm text-slate-400 mt-1">Google Cloud</p>
+        <!-- Contact -->
+        <section class="section contact" id="contact">
+            <div class="wrap">
+                <p class="section-num reveal">05 — Contact</p>
+                <h2 class="contact-title reveal">Have a problem worth<br><em>modelling?</em> Let's talk.</h2>
+                <div class="contact-row reveal">
+                    <a class="email" href="mailto:vaidandeayush.av@gmail.com">vaidandeayush.av@gmail.com</a>
+                    <button class="btn btn-ghost btn-small" id="copy-email" type="button" data-email="vaidandeayush.av@gmail.com">Copy</button>
                 </div>
-                <div class="glassmorphism rounded-lg p-6">
-                    <h3 class="font-semibold text-white">Intro to Artificial Intelligence (AI)</h3>
-                    <p class="text-sm text-slate-400 mt-1">Coursera</p>
-                </div>
-                <div class="glassmorphism rounded-lg p-6">
-                    <h3 class="font-semibold text-white">GATE 2024 (DS/AI) Qualified</h3>
-                    <p class="text-sm text-slate-400 mt-1">Graduate Aptitude Test in Engineering</p>
-                </div>
-                <div class="glassmorphism rounded-lg p-6">
-                    <h3 class="font-semibold text-white">Google Cloud Big Data and Machine Learning Fundamentals</h3>
-                     <p class="text-sm text-slate-400 mt-1">Google Cloud</p>
-                </div>
+                <ul class="socials reveal">
+                    <li><a href="https://www.linkedin.com/in/ayush-vaidande-383998218/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="https://github.com/THEIOTGUY" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a></li>
+                </ul>
             </div>
         </section>
-
-        <section id="contact" class="section-fade-in scroll-mt-20 py-24">
-            <h2 class="text-3xl font-bold text-white text-center mb-4">Get In Touch</h2>
-            <p class="max-w-2xl mx-auto text-center text-slate-400 mb-12">
-                I'm always open to discussing new projects, creative ideas, or opportunities. Fill out the form below to get in touch.
-            </p>
-            <form id="contact-form" class="max-w-xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label for="name" class="sr-only">Your Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your Name" class="bg-slate-800/50 border border-slate-700 rounded-md py-3 px-4 text-white w-full focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all" required>
-                    </div>
-                    <div>
-                        <label for="email" class="sr-only">Your Email</label>
-                        <input type="email" id="email" name="email" placeholder="Your Email" class="bg-slate-800/50 border border-slate-700 rounded-md py-3 px-4 text-white w-full focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all" required>
-                    </div>
-                </div>
-                <div>
-                    <label for="message" class="sr-only">Your Message</label>
-                    <textarea id="message" name="message" placeholder="Your Message" rows="5" class="w-full bg-slate-800/50 border border-slate-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all mb-6" required></textarea>
-                </div>
-                <div id="form-feedback" class="text-center mb-6"></div>
-                <div class="text-center">
-                    <button type="submit" class="contact-btn inline-block text-white font-bold px-8 py-3 rounded-md transition-transform duration-300 hover:scale-105">
-                        Send Message
-                    </button>
-                </div>
-            </form>
-        </section>
-
     </main>
 
-    <!-- Animation Control -->
-    <button id="animation-control" class="fixed bottom-5 right-5 z-50 w-12 h-12 rounded-full glassmorphism flex justify-center items-center text-sky-400 hover:text-white hover:border-sky-400" aria-label="Pause or play background animation">
-        <!-- Pause Icon -->
-        <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6" />
-        </svg>
-        <!-- Play Icon -->
-        <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-        </svg>
-    </button>
-
-    <!-- Footer -->
-    <footer class="border-t border-sky-400/20 mt-12">
-        <div class="container mx-auto px-6 py-6 text-center text-slate-500 text-sm">
-            <p>&copy; 2024 Ayush Vaidande. Designed & Built with a little help from AI.</p>
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <span>© <span id="year">2026</span> Ayush Vaidande</span>
+            <span class="muted">Set in Instrument Serif &amp; Inter Tight</span>
+            <a href="#top">Back to top ↑</a>
         </div>
     </footer>
-    
-    <!-- AI Insights Modal -->
-    <div id="ai-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden transition-opacity duration-300">
-        <div class="glassmorphism rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col border border-sky-500/50 shadow-sky-500/20">
-            <div class="p-6 border-b border-sky-400/20 flex justify-between items-center">
-                <h3 class="text-xl font-bold text-white">✨ AI-Generated Project Insights</h3>
-                <button id="close-modal-btn" class="text-slate-400 hover:text-white text-3xl leading-none">&times;</button>
-            </div>
-            <div id="modal-content" class="p-6 overflow-y-auto">
-                <!-- Content will be injected here -->
-            </div>
-        </div>
-    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="js/main.js"></script>
 </body>
 </html>
-
-
