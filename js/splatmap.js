@@ -158,14 +158,18 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud, reduceMotion) {
 
     // ---------------------------------------------------------------- canvases
     const mctx = mapCanvas.getContext('2d');
-    const cctx = camCanvas.getContext('2d');
+    const cctx = camCanvas ? camCanvas.getContext('2d') : null;
     let MW = 0, MH = 0, CW = 0, CH = 0, dpr = 1;
     function resize() {
         dpr = Math.min(window.devicePixelRatio || 1, 1.75);
-        const m = mapCanvas.getBoundingClientRect(), c = camCanvas.getBoundingClientRect();
-        MW = m.width; MH = m.height; CW = c.width; CH = c.height;
+        const m = mapCanvas.getBoundingClientRect();
+        MW = m.width; MH = m.height;
         mapCanvas.width = Math.round(MW * dpr); mapCanvas.height = Math.round(MH * dpr);
-        camCanvas.width = Math.round(CW * dpr); camCanvas.height = Math.round(CH * dpr);
+        if (camCanvas) {
+            const c = camCanvas.getBoundingClientRect();
+            CW = c.width; CH = c.height;
+            camCanvas.width = Math.round(CW * dpr); camCanvas.height = Math.round(CH * dpr);
+        }
     }
 
     // Draw one Gaussian with 2D covariance [[m00, m01], [m01, m11]] (px²) centred at (px, py)
@@ -378,6 +382,7 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud, reduceMotion) {
 
     // ---------------------------------------------------------------- 360° camera view
     function renderCam() {
+        if (!cctx) return;
         const W = CW, H = CH, ctx = cctx;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.clearRect(0, 0, W, H);
@@ -490,12 +495,12 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud, reduceMotion) {
         let n = 0;
         for (const s of splats) if (s.seen > 0.5) n++;
         const obs = obstacles.filter(o => o.detect > 0.5).length;
-        hud.splats.textContent = n.toLocaleString();
-        hud.obs.textContent = `${obs} / ${obstacles.length}`;
+        if (hud.splats) hud.splats.textContent = n.toLocaleString();
+        if (hud.obs) hud.obs.textContent = `${obs} / ${obstacles.length}`;
         const deg = Math.round(Math.atan2(robot.hz, robot.hx) * 180 / Math.PI);
-        hud.pose.textContent = `${robot.x.toFixed(2)}, ${robot.z.toFixed(2)} · ${deg}°`;
+        if (hud.pose) hud.pose.textContent = `${robot.x.toFixed(2)}, ${robot.z.toFixed(2)} · ${deg}°`;
         const lt = simT - Math.max(0, lap) * LAP;
-        hud.time.textContent = `t ${String(Math.floor(lt / 60)).padStart(2, '0')}:${(lt % 60).toFixed(1).padStart(4, '0')}`;
+        if (hud.time) hud.time.textContent = `t ${String(Math.floor(lt / 60)).padStart(2, '0')}:${(lt % 60).toFixed(1).padStart(4, '0')}`;
     }
 
     function renderAll() { renderMap(); renderCam(); updateHud(); }
@@ -552,7 +557,7 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud, reduceMotion) {
 
     const ro = new ResizeObserver(() => { resize(); if (!running) renderAll(); });
     ro.observe(mapCanvas);
-    ro.observe(camCanvas);
+    if (camCanvas) ro.observe(camCanvas);
     new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting;
         visible ? start() : stop();
