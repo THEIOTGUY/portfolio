@@ -15,20 +15,23 @@ document.addEventListener('DOMContentLoaded', () => {
         reduceMotion
     );
 
-    // --- Theme toggle ---
+    // --- Theme toggle (dark by default) ---
     const themeToggle = document.getElementById('theme-toggle');
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
-    const currentTheme = () => root.dataset.theme || (systemDark.matches ? 'dark' : 'light');
-
-    themeToggle.addEventListener('click', () => {
-        const next = currentTheme() === 'dark' ? 'light' : 'dark';
-        root.dataset.theme = next;
-        try { localStorage.setItem('theme', next); } catch (e) {}
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    const applyTheme = (theme) => {
+        root.dataset.theme = theme;
+        themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+        themeMeta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
         scene.refreshColors();
+    };
+    applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark');
+    themeToggle.addEventListener('click', () => {
+        const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
     });
-    systemDark.addEventListener('change', () => scene.refreshColors());
 
-    // --- Header border + reading progress ---
+    // --- Header background + reading progress ---
     const header = document.querySelector('.site-header');
     const progress = document.getElementById('progress');
     const onScroll = () => {
@@ -51,6 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
     menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+    document.addEventListener('click', (e) => {
+        if (nav.classList.contains('open') && !nav.contains(e.target) && !menuBtn.contains(e.target)) setMenu(false);
+    });
 
     // --- Active nav link ---
     const navLinks = [...nav.querySelectorAll('.nav-link')];
@@ -69,6 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
     reveals.forEach(el => {
         const siblings = [...el.parentElement.children].filter(c => c.classList.contains('reveal'));
         el.style.setProperty('--d', `${Math.min(siblings.indexOf(el), 5) * 70}ms`);
+        // Drop the stagger once revealed so hover transitions respond immediately
+        el.addEventListener('transitionend', (e) => {
+            if (e.propertyName === 'opacity' && el.classList.contains('in')) el.style.setProperty('--d', '0s');
+        });
     });
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -79,6 +89,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(el => revealObserver.observe(el));
+
+    // --- Cursor spotlight on cards ---
+    if (window.matchMedia('(hover: hover)').matches) {
+        document.addEventListener('pointermove', (e) => {
+            const card = e.target.closest && e.target.closest('.card');
+            if (!card) return;
+            const r = card.getBoundingClientRect();
+            card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+            card.style.setProperty('--my', `${e.clientY - r.top}px`);
+        }, { passive: true });
+    }
 
     // --- Copy email ---
     const toast = document.getElementById('toast');
