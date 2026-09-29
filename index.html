@@ -1,54 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayush Vaidande — AI & Robotics Researcher</title>
-    <meta name="description" content="Portfolio of Ayush Vaidande, AI & Robotics researcher at CAIR, IIT Mandi. Robotics perception, 3D vision, large language models, speech and backend engineering.">
+    <meta name="description" content="Portfolio of Ayush Vaidande, AI & Robotics researcher at CAIR, IIT Mandi. Camera-only perception for mobile robots, 3D vision, large language models, speech and backend engineering.">
     <meta property="og:title" content="Ayush Vaidande — AI & Robotics Researcher">
-    <meta property="og:description" content="AI & Robotics researcher at CAIR, IIT Mandi: robot perception, 3D vision, LLMs, speech and backend engineering.">
+    <meta property="og:description" content="Teaching robots to see with a single 360° camera. AI & Robotics researcher at CAIR, IIT Mandi.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://theiotguy.github.io/portfolio/">
-    <meta name="theme-color" content="#07080c">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%2338bdf8'/><stop offset='1' stop-color='%23a78bfa'/></linearGradient></defs><rect width='100' height='100' rx='26' fill='url(%23g)'/><text x='50' y='64' text-anchor='middle' font-size='44' font-weight='700' font-family='Arial,sans-serif' fill='%2307080c'>AV</text></svg>">
+    <meta name="theme-color" content="#f1efe8">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23151513'/><circle cx='74' cy='28' r='9' fill='%23e5461f'/><text x='44' y='70' text-anchor='middle' font-size='54' font-style='italic' font-family='Georgia,serif' fill='%23f1efe8'>a</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script>
-        // Apply saved theme before paint to avoid a flash (dark is the default)
+        // Resolve the theme before first paint: saved choice, else the system setting
         document.documentElement.classList.add('js');
-        try {
-            const t = localStorage.getItem('theme');
-            if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
-        } catch (e) {}
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.dataset.theme = t;
+        })();
     </script>
 </head>
 <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip" href="#main">Skip to content</a>
 
-    <!-- Header -->
-    <header class="site-header" id="top">
+    <header class="site-header">
         <div class="wrap header-inner">
-            <a href="#top" class="brand" aria-label="Ayush Vaidande — home">
-                <span class="brand-mark">AV</span>
+            <a href="#top" class="brand" aria-label="Ayush Vaidande, back to top">
+                <span class="brand-mark" aria-hidden="true">a<i></i></span>
                 <span class="brand-name">Ayush Vaidande</span>
             </a>
 
             <nav class="nav" id="nav" aria-label="Primary">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#about" class="nav-link"><span>01</span>About</a>
+                <a href="#experience" class="nav-link"><span>02</span>Experience</a>
+                <a href="#work" class="nav-link"><span>03</span>Work</a>
+                <a href="#skills" class="nav-link"><span>04</span>Skills</a>
+                <a href="#contact" class="nav-link"><span>05</span>Contact</a>
+                <a class="nav-link nav-resume" href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" rel="noopener"><span>↗</span>Résumé</a>
             </nav>
 
             <div class="header-actions">
-                <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to light theme">
-                    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
-                    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></svg>
+                <a class="resume-link" href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
+                <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch theme">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" class="fill"/></svg>
                 </button>
-                <a class="btn btn-ghost btn-small resume-btn" href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
                 <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
                     <span></span><span></span>
                 </button>
@@ -59,434 +60,382 @@
 
     <main id="main">
         <!-- Hero -->
-        <section class="hero">
-            <div class="hero-bg" aria-hidden="true">
-                <span class="glow glow-a"></span>
-                <span class="glow glow-b"></span>
-                <span class="grid-lines"></span>
-            </div>
-
-            <div class="wrap hero-grid">
-                <div class="hero-copy">
-                    <a class="badge reveal" href="#project-amr">
-                        <span class="badge-dot" aria-hidden="true"></span>
-                        Now: camera-only robot mapping
-                        <span class="badge-arrow" aria-hidden="true">→</span>
-                    </a>
-                    <h1 class="hero-title reveal">Ayush<br><span class="grad-text">Vaidande</span></h1>
-                    <p class="hero-role reveal">AI &amp; Robotics Researcher at <strong>CAIR, IIT Mandi</strong></p>
-                    <p class="hero-lede reveal">
-                        I build AI that works in the real world: perception for autonomous mobile robots,
-                        large language models and speech for Indic languages, and the backends that ship them.
-                    </p>
-                    <div class="hero-cta reveal">
-                        <a href="#projects" class="btn btn-primary">View projects <span aria-hidden="true">→</span></a>
-                        <a href="#contact" class="btn btn-ghost">Get in touch</a>
-                    </div>
-                    <ul class="hero-social reveal">
-                        <li><a href="https://github.com/THEIOTGUY" target="_blank" rel="noopener" aria-label="GitHub">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.6 0-12 5.4-12 12 0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.6 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 24 12c0-6.6-5.4-12-12-12z"/></svg>
-                            <span>GitHub</span>
-                        </a></li>
-                        <li><a href="https://www.linkedin.com/in/ayush-vaidande-383998218/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.5H3.5V9h3.6v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></svg>
-                            <span>LinkedIn</span>
-                        </a></li>
-                        <li><a href="mailto:vaidandeayush.av@gmail.com" aria-label="Email">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-                            <span>Email</span>
-                        </a></li>
-                    </ul>
+        <section class="hero" id="top">
+            <div class="wrap">
+                <div class="hero-meta reveal">
+                    <p>AI &amp; Robotics Researcher<br><span>CAIR, IIT Mandi</span></p>
+                    <p>Mandi, Himachal Pradesh<br><span><time id="clock">IST</time> local time</span></p>
+                    <p class="hero-status"><span class="live-dot" aria-hidden="true"></span>Open to research <br>collaborations</p>
                 </div>
 
-                <figure class="hero-visual reveal">
-                    <div class="sim-card">
-                        <div class="vp-map">
-                            <canvas id="map-canvas" role="img" aria-label="Animated Gaussian-splat map being built by a small robot"></canvas>
-                            <div class="hud hud-tl">
-                                <span class="hud-chip"><span class="rec" aria-hidden="true"></span>3DGS · live</span>
-                            </div>
-                            <p class="hud hud-tr"><span class="hud-chip hud-chip--dim">drag to orbit</span></p>
-                            <dl class="hud hud-bl">
-                                <div><dt>splats</dt><dd id="hud-splats">0</dd></div>
-                                <div><dt>obstacles</dt><dd id="hud-obs">0</dd></div>
-                            </dl>
-                        </div>
+                <h1 class="display hero-title">
+                    <span class="line reveal">Teaching robots</span>
+                    <span class="line reveal">to <em>see</em> the world</span>
+                    <span class="line reveal">with a single camera.</span>
+                </h1>
+
+                <div class="hero-foot">
+                    <p class="hero-lede reveal">
+                        I'm <strong>Ayush Vaidande</strong>. I build AI that has to work outside the notebook:
+                        perception for autonomous mobile robots, language and speech models for Indic
+                        languages, and the backends that ship them.
+                    </p>
+                    <div class="hero-cta reveal">
+                        <a href="#work" class="btn btn-solid">Selected work <span class="arr" aria-hidden="true">→</span></a>
+                        <a href="#contact" class="btn btn-line">Get in touch</a>
                     </div>
-                    <figcaption>
-                        <a href="#project-amr">A robot mapping a room with one 360° camera: a live sketch of my current research <span aria-hidden="true">↓</span></a>
-                    </figcaption>
-                </figure>
+                </div>
             </div>
 
-            <div class="wrap">
-                <ul class="stats reveal">
-                    <li class="stat">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-                        <div><span class="stat-k">Based in</span><span class="stat-v">Mandi, India</span></div>
-                    </li>
-                    <li class="stat">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/></svg>
-                        <div><span class="stat-k">Currently</span><span class="stat-v">Researcher, CAIR IIT Mandi</span></div>
-                    </li>
-                    <li class="stat">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7-4.7-1.8 4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>
-                        <div><span class="stat-k">Works across</span><span class="stat-v">Robotics · LLMs · Speech</span></div>
-                    </li>
-                    <li class="stat">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg>
-                        <div><span class="stat-k">Credential</span><span class="stat-v">GATE 2024 · DS &amp; AI</span></div>
-                    </li>
-                </ul>
-            </div>
+            <!-- Figure 1: the live splat-map simulation -->
+            <figure class="fig reveal">
+                <div class="wrap">
+                    <div class="fig-frame">
+                        <canvas id="map-canvas" role="img" aria-label="Animated Gaussian-splat map of a room being built by a small robot as it drives a figure-eight"></canvas>
+                        <span class="corner tl" aria-hidden="true"></span><span class="corner tr" aria-hidden="true"></span>
+                        <span class="corner bl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
+                        <p class="fig-tag"><span class="rec" aria-hidden="true"></span>Live · 3D Gaussian Splatting</p>
+                        <p class="fig-hint">Drag to orbit</p>
+                    </div>
+                    <div class="fig-bar">
+                        <figcaption>
+                            <span class="fig-no">Fig. 1</span>
+                            A robot maps a room using one 360° camera, then marks obstacles in the map.
+                            A running sketch of <a href="#project-amr">my current research</a>, rendered in your browser.
+                        </figcaption>
+                        <dl class="readout" aria-label="Simulation readout">
+                            <div><dt>Splats</dt><dd id="hud-splats">0</dd></div>
+                            <div><dt>Obstacles</dt><dd id="hud-obs">0</dd></div>
+                            <div><dt>Pose</dt><dd id="hud-pose">0.00, 0.00</dd></div>
+                            <div><dt>Clock</dt><dd id="hud-time">t 00:00.0</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </figure>
         </section>
-
-        <div class="ticker" aria-hidden="true">
-            <div class="ticker-track">
-                <ul>
-                    <li>Robotics perception</li><li>3D Gaussian Splatting</li><li>Large language models</li><li>Speech &amp; Indic NLP</li><li>Computer vision</li><li>Backend engineering</li><li>PyTorch</li><li>OpenCV</li>
-                </ul>
-                <ul>
-                    <li>Robotics perception</li><li>3D Gaussian Splatting</li><li>Large language models</li><li>Speech &amp; Indic NLP</li><li>Computer vision</li><li>Backend engineering</li><li>PyTorch</li><li>OpenCV</li>
-                </ul>
-            </div>
-        </div>
 
         <!-- About -->
         <section class="section" id="about">
-            <div class="wrap">
-                <header class="sec-head reveal">
-                    <p class="eyebrow"><span>01</span>About</p>
-                    <h2 class="sec-title">From electronics to robots that <span class="grad-text">see</span>.</h2>
+            <div class="wrap grid">
+                <header class="sec-label reveal">
+                    <p class="idx">01</p>
+                    <p>About</p>
                 </header>
 
-                <div class="bento">
-                    <article class="card bento-bio reveal">
-                        <p class="bio-lead">
-                            I started in electronics, moved through language models and speech,
-                            and now build the eyes of mobile robots.
-                        </p>
+                <div class="sec-body">
+                    <p class="lead reveal">
+                        I started in electronics, moved through language models and speech,
+                        and now build <em>the eyes</em> of mobile robots.
+                    </p>
+
+                    <div class="prose cols reveal">
                         <p>
-                            Hello! I'm Ayush. My degree is in Electronics &amp; Telecommunication with honours
-                            in AI/ML, which gave me a foundation in deep learning, NLP and computer vision,
-                            and in the signals and hardware that robotics runs on.
+                            My degree is in Electronics &amp; Telecommunication with honours in AI/ML.
+                            It gave me a grounding in deep learning, NLP and computer vision, and in the
+                            signals and hardware that robotics runs on.
                         </p>
                         <p>
                             Today I'm an AI &amp; Robotics researcher at CAIR, IIT Mandi. Before that, at
                             YellowSense Technologies, I built generative models with speech-to-text and
-                            text-to-speech for Indic languages, along with the APIs and databases behind
-                            them. I'm driven by LLMs, AI research and well-engineered backends.
+                            text-to-speech for Indic languages, along with the APIs and databases behind them.
+                            I'm driven by LLMs, AI research and well-engineered backends.
                         </p>
-                    </article>
+                    </div>
 
-                    <article class="card mini reveal">
-                        <span class="mini-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg></span>
-                        <p class="mini-k">Education</p>
-                        <p class="mini-v">B.E. Electronics &amp; Telecommunication</p>
-                        <p class="mini-s">Honours in AI/ML</p>
-                    </article>
-
-                    <article class="card mini reveal">
-                        <span class="mini-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M8 19v2M16 19v2"/></svg></span>
-                        <p class="mini-k">Currently</p>
-                        <p class="mini-v">AI &amp; Robotics Researcher</p>
-                        <p class="mini-s">CAIR, IIT Mandi · since Jun 2024</p>
-                    </article>
-
-                    <article class="card mini mini--wide reveal">
-                        <span class="mini-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
-                        <p class="mini-k">Interests</p>
-                        <ul class="chips">
-                            <li>Robot perception</li><li>3D vision</li><li>LLMs</li><li>Speech</li>
-                        </ul>
-                    </article>
-
-                    <article class="card mini mini--wide reveal">
-                        <span class="mini-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
-                        <p class="mini-k">Everyday stack</p>
-                        <ul class="chips">
-                            <li>Python</li><li>PyTorch</li><li>OpenCV</li><li>Pandas</li><li>NumPy</li><li>SQL</li>
-                        </ul>
-                    </article>
+                    <dl class="facts">
+                        <div class="reveal">
+                            <dt>Education</dt>
+                            <dd>B.E. Electronics &amp; Telecommunication<span>Honours in AI/ML</span></dd>
+                        </div>
+                        <div class="reveal">
+                            <dt>Currently</dt>
+                            <dd>AI &amp; Robotics Researcher<span>CAIR, IIT Mandi · since Jun 2024</span></dd>
+                        </div>
+                        <div class="reveal">
+                            <dt>Interests</dt>
+                            <dd>Robot perception, 3D vision<span>LLMs · Speech</span></dd>
+                        </div>
+                        <div class="reveal">
+                            <dt>Credential</dt>
+                            <dd>GATE 2024, DS &amp; AI<span>Qualified · IISc Bangalore</span></dd>
+                        </div>
+                    </dl>
                 </div>
             </div>
         </section>
 
         <!-- Experience -->
         <section class="section" id="experience">
-            <div class="wrap">
-                <header class="sec-head reveal">
-                    <p class="eyebrow"><span>02</span>Experience</p>
-                    <h2 class="sec-title">Where I've worked.</h2>
+            <div class="wrap grid">
+                <header class="sec-label reveal">
+                    <p class="idx">02</p>
+                    <p>Experience</p>
                 </header>
 
-                <ol class="timeline">
-                    <li class="tl-item reveal">
-                        <span class="tl-dot tl-dot--live" aria-hidden="true"></span>
-                        <article class="card tl-card">
-                            <div class="tl-top">
-                                <div>
-                                    <h3>AI &amp; Robotics Researcher</h3>
-                                    <p class="tl-org">Centre for Artificial Intelligence &amp; Robotics, IIT Mandi</p>
-                                </div>
-                                <span class="date-pill date-pill--live">Jun 2024 — Present</span>
+                <div class="sec-body">
+                    <h2 class="display sec-title reveal">Where I've <em>worked</em>.</h2>
+
+                    <ol class="ledger">
+                        <li class="ledger-row reveal">
+                            <p class="ledger-date"><span class="live-dot" aria-hidden="true"></span>Jun 2024 — Now</p>
+                            <div class="ledger-main">
+                                <h3>AI &amp; Robotics Researcher</h3>
+                                <p class="ledger-org">Centre for Artificial Intelligence &amp; Robotics, IIT Mandi</p>
                             </div>
-                            <p>Research on perception for autonomous mobile robots: building monocular 3D Gaussian Splatting maps from a single 360° camera and detecting obstacles for navigation.</p>
-                            <ul class="chips">
-                                <li>Robotics</li><li>360° vision</li><li>3DGS</li><li>Computer vision</li>
-                            </ul>
-                        </article>
-                    </li>
-                    <li class="tl-item reveal">
-                        <span class="tl-dot" aria-hidden="true"></span>
-                        <article class="card tl-card">
-                            <div class="tl-top">
-                                <div>
-                                    <h3>AI/ML &amp; Backend Engineer</h3>
-                                    <p class="tl-org">YellowSense Technologies</p>
-                                </div>
-                                <span class="date-pill">Feb 2024 — May 2024</span>
+                            <div class="ledger-detail">
+                                <p>Research on perception for autonomous mobile robots: building monocular 3D Gaussian Splatting maps from a single 360° camera and detecting obstacles for navigation.</p>
+                                <ul class="tags"><li>Robotics</li><li>360° vision</li><li>3DGS</li><li>Computer vision</li></ul>
                             </div>
-                            <p>Built generative LLMs with TTS/STT for Indic languages, an AI-driven recommendation system for household services, and the backend (databases and APIs) to serve them.</p>
-                            <ul class="chips">
-                                <li>LLM</li><li>TTS / STT</li><li>RecSys</li><li>Backend</li>
-                            </ul>
-                        </article>
-                    </li>
-                    <li class="tl-item reveal">
-                        <span class="tl-dot" aria-hidden="true"></span>
-                        <article class="card tl-card">
-                            <div class="tl-top">
-                                <div>
-                                    <h3>Machine Learning Intern</h3>
-                                    <p class="tl-org">Techno Hacks Edu Tech</p>
-                                </div>
-                                <span class="date-pill">Jun 2023 — Jul 2023</span>
+                        </li>
+                        <li class="ledger-row reveal">
+                            <p class="ledger-date">Feb — May 2024</p>
+                            <div class="ledger-main">
+                                <h3>AI/ML &amp; Backend Engineer</h3>
+                                <p class="ledger-org">YellowSense Technologies</p>
                             </div>
-                            <p>Data preprocessing, model development and collaborative problem-solving with Python and ML frameworks.</p>
-                            <ul class="chips">
-                                <li>Python</li><li>Machine learning</li>
-                            </ul>
-                        </article>
-                    </li>
-                </ol>
+                            <div class="ledger-detail">
+                                <p>Built generative LLMs with TTS/STT for Indic languages, an AI-driven recommendation system for household services, and the databases and APIs that serve them.</p>
+                                <ul class="tags"><li>LLM</li><li>TTS / STT</li><li>RecSys</li><li>Backend</li></ul>
+                            </div>
+                        </li>
+                        <li class="ledger-row reveal">
+                            <p class="ledger-date">Jun — Jul 2023</p>
+                            <div class="ledger-main">
+                                <h3>Machine Learning Intern</h3>
+                                <p class="ledger-org">Techno Hacks Edu Tech</p>
+                            </div>
+                            <div class="ledger-detail">
+                                <p>Data preprocessing, model development and collaborative problem-solving with Python and ML frameworks.</p>
+                                <ul class="tags"><li>Python</li><li>Machine learning</li></ul>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
             </div>
         </section>
 
-        <!-- Projects -->
-        <section class="section" id="projects">
-            <div class="wrap">
-                <header class="sec-head reveal">
-                    <p class="eyebrow"><span>03</span>Projects</p>
-                    <h2 class="sec-title">Selected work.</h2>
+        <!-- Work -->
+        <section class="section" id="work">
+            <div class="wrap grid">
+                <header class="sec-label reveal">
+                    <p class="idx">03</p>
+                    <p>Selected work</p>
                 </header>
 
-                <div class="projects">
-                    <article class="card project project--feature reveal" id="project-amr">
-                        <div class="project-art project-art--grid" aria-hidden="true">
-                            <svg viewBox="0 0 200 110">
-                                <path class="a-line" d="M50 0V110M100 0V110M150 0V110"/>
-                                <path class="a-line a-dash" d="M0 55H200"/>
-                                <path class="a-curve" d="M0 34Q50 12 100 34T200 34"/>
-                                <path class="a-curve" d="M0 76Q50 98 100 76T200 76"/>
-                                <rect class="a-box" x="118" y="40" width="30" height="30" rx="2"/>
-                                <text class="a-label" x="8" y="102">360° frame</text>
-                            </svg>
-                            <svg viewBox="0 0 200 110">
-                                <g class="a-splats">
-                                    <ellipse cx="46" cy="70" rx="26" ry="9" transform="rotate(-12 46 70)" fill-opacity=".22"/>
-                                    <ellipse cx="80" cy="78" rx="30" ry="8" transform="rotate(6 80 78)" fill-opacity=".18"/>
-                                    <ellipse cx="128" cy="80" rx="34" ry="9" transform="rotate(-4 128 80)" fill-opacity=".2"/>
-                                    <ellipse cx="160" cy="70" rx="24" ry="8" transform="rotate(14 160 70)" fill-opacity=".16"/>
-                                    <ellipse cx="62" cy="40" rx="10" ry="22" transform="rotate(8 62 40)" fill-opacity=".3"/>
-                                    <ellipse cx="146" cy="36" rx="16" ry="10" transform="rotate(30 146 36)" fill-opacity=".24"/>
-                                    <ellipse cx="168" cy="42" rx="9" ry="14" transform="rotate(-10 168 42)" fill-opacity=".18"/>
-                                </g>
-                                <g class="a-splats-accent">
-                                    <ellipse cx="104" cy="50" rx="14" ry="22" transform="rotate(-6 104 50)" fill-opacity=".85"/>
-                                    <ellipse cx="118" cy="46" rx="9" ry="18" transform="rotate(12 118 46)" fill-opacity=".6"/>
-                                </g>
-                                <text class="a-label" x="8" y="102">3DGS map</text>
-                            </svg>
-                            <svg viewBox="0 0 200 110">
-                                <defs>
-                                    <pattern id="occ-grid" width="15" height="15" patternUnits="userSpaceOnUse" x="10" y="5">
-                                        <path d="M15 0H0V15" class="a-gridline"/>
-                                    </pattern>
-                                </defs>
-                                <rect x="10" y="5" width="180" height="90" fill="url(#occ-grid)"/>
-                                <rect class="a-unknown" x="145" y="5" width="45" height="30"/>
-                                <rect class="a-occ" x="55" y="20" width="30" height="15"/>
-                                <rect class="a-occ" x="115" y="50" width="15" height="30"/>
-                                <circle class="a-robot" cx="32" cy="57" r="6"/>
-                                <circle class="a-range" cx="32" cy="57" r="20"/>
-                                <text class="a-label" x="8" y="104">obstacles</text>
-                            </svg>
-                            <svg viewBox="0 0 200 110">
-                                <rect x="10" y="5" width="180" height="90" fill="url(#occ-grid)" opacity=".6"/>
-                                <rect class="a-occ" x="55" y="20" width="30" height="15"/>
-                                <rect class="a-occ" x="115" y="50" width="15" height="30"/>
-                                <path class="a-path" d="M32 57C60 57 80 51 96 43S110 29 140 31 172 39 176 23"/>
-                                <circle class="a-robot" cx="32" cy="57" r="6"/>
-                                <path class="a-flag" d="M176 23V7L188 12 176 17"/>
-                                <text class="a-label" x="8" y="104">navigation</text>
-                            </svg>
+                <div class="sec-body">
+                    <h2 class="display sec-title reveal">Things I've <em>built</em>.</h2>
+                </div>
+            </div>
+
+            <!-- Featured case study -->
+            <article class="case case--feature" id="project-amr">
+                <div class="wrap">
+                    <div class="case-head reveal">
+                        <p class="case-no">A</p>
+                        <div>
+                            <p class="case-meta"><span class="status"><span class="live-dot" aria-hidden="true"></span>Ongoing research</span><span>CAIR, IIT Mandi</span><span>2024 —</span></p>
+                            <h3 class="display case-title">Camera-only mapping for mobile robots</h3>
                         </div>
-                        <div class="project-body">
-                            <div class="project-meta">
-                                <span class="status-pill"><span class="badge-dot" aria-hidden="true"></span>Ongoing</span>
-                                <span>CAIR, IIT Mandi</span>
+                    </div>
+
+                    <div class="case-intro">
+                        <p class="reveal">
+                            Autonomous mobile robots usually lean on LiDAR or depth sensors to understand a room.
+                            This work asks how far one 360° camera can go on its own. Monocular imagery is
+                            reconstructed into a 3D Gaussian Splatting map, and that map is used to detect
+                            obstacles for navigation.
+                        </p>
+                        <ul class="tags reveal"><li>360° vision</li><li>3D Gaussian Splatting</li><li>Monocular mapping</li><li>Obstacle detection</li><li>AMR</li></ul>
+                    </div>
+
+                    <ol class="pipeline" aria-label="Pipeline, from camera frame to navigation">
+                        <li class="stage reveal">
+                            <div class="stage-art" aria-hidden="true">
+                                <svg viewBox="0 0 200 120">
+                                    <path class="a-line" d="M50 0V120M100 0V120M150 0V120"/>
+                                    <path class="a-line a-dash" d="M0 60H200"/>
+                                    <path class="a-curve" d="M0 38Q50 14 100 38T200 38"/>
+                                    <path class="a-curve" d="M0 82Q50 106 100 82T200 82"/>
+                                    <rect class="a-box" x="118" y="44" width="30" height="30" rx="1"/>
+                                </svg>
                             </div>
-                            <h3>Camera-only mapping for mobile robots</h3>
-                            <p>Perception for autonomous mobile robots using just one 360° camera, with no LiDAR or depth sensors. Monocular imagery is reconstructed into a 3D Gaussian Splatting map, which is then used to detect obstacles for navigation.</p>
-                            <ul class="chips">
-                                <li>360° vision</li><li>3D Gaussian Splatting</li><li>Monocular mapping</li><li>Obstacle detection</li><li>AMR</li>
-                            </ul>
-                            <p class="project-link project-link--muted">Research in progress</p>
-                        </div>
-                    </article>
+                            <p class="stage-k"><span>a</span>Capture</p>
+                            <p class="stage-v">One equirectangular 360° frame. No LiDAR, no depth.</p>
+                        </li>
+                        <li class="stage reveal">
+                            <div class="stage-art" aria-hidden="true">
+                                <svg viewBox="0 0 200 120">
+                                    <g class="a-splats">
+                                        <ellipse cx="46" cy="78" rx="26" ry="9" transform="rotate(-12 46 78)" fill-opacity=".22"/>
+                                        <ellipse cx="80" cy="86" rx="30" ry="8" transform="rotate(6 80 86)" fill-opacity=".18"/>
+                                        <ellipse cx="128" cy="88" rx="34" ry="9" transform="rotate(-4 128 88)" fill-opacity=".2"/>
+                                        <ellipse cx="160" cy="78" rx="24" ry="8" transform="rotate(14 160 78)" fill-opacity=".16"/>
+                                        <ellipse cx="62" cy="46" rx="10" ry="22" transform="rotate(8 62 46)" fill-opacity=".3"/>
+                                        <ellipse cx="146" cy="42" rx="16" ry="10" transform="rotate(30 146 42)" fill-opacity=".24"/>
+                                        <ellipse cx="168" cy="48" rx="9" ry="14" transform="rotate(-10 168 48)" fill-opacity=".18"/>
+                                    </g>
+                                    <g class="a-splats-accent">
+                                        <ellipse cx="104" cy="56" rx="14" ry="22" transform="rotate(-6 104 56)" fill-opacity=".85"/>
+                                        <ellipse cx="118" cy="52" rx="9" ry="18" transform="rotate(12 118 52)" fill-opacity=".6"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <p class="stage-k"><span>b</span>Reconstruct</p>
+                            <p class="stage-v">Build a 3D Gaussian Splatting map from monocular imagery.</p>
+                        </li>
+                        <li class="stage reveal">
+                            <div class="stage-art" aria-hidden="true">
+                                <svg viewBox="0 0 200 120">
+                                    <defs>
+                                        <pattern id="occ-grid" width="15" height="15" patternUnits="userSpaceOnUse" x="10" y="10">
+                                            <path d="M15 0H0V15" class="a-gridline"/>
+                                        </pattern>
+                                    </defs>
+                                    <rect x="10" y="10" width="180" height="100" fill="url(#occ-grid)"/>
+                                    <rect class="a-unknown" x="145" y="10" width="45" height="30"/>
+                                    <rect class="a-occ" x="55" y="25" width="30" height="15"/>
+                                    <rect class="a-occ" x="115" y="55" width="15" height="30"/>
+                                    <circle class="a-range" cx="32" cy="62" r="20"/>
+                                    <circle class="a-robot" cx="32" cy="62" r="6"/>
+                                </svg>
+                            </div>
+                            <p class="stage-k"><span>c</span>Detect</p>
+                            <p class="stage-v">Find obstacles in the reconstructed map.</p>
+                        </li>
+                        <li class="stage reveal">
+                            <div class="stage-art" aria-hidden="true">
+                                <svg viewBox="0 0 200 120">
+                                    <rect x="10" y="10" width="180" height="100" fill="url(#occ-grid)" opacity=".6"/>
+                                    <rect class="a-occ" x="55" y="25" width="30" height="15"/>
+                                    <rect class="a-occ" x="115" y="55" width="15" height="30"/>
+                                    <path class="a-path" d="M32 62C60 62 80 56 96 48S110 34 140 36 172 44 176 28"/>
+                                    <circle class="a-robot" cx="32" cy="62" r="6"/>
+                                    <path class="a-flag" d="M176 28V12L188 17 176 22"/>
+                                </svg>
+                            </div>
+                            <p class="stage-k"><span>d</span>Navigate</p>
+                            <p class="stage-v">Plan a path around what the camera found.</p>
+                        </li>
+                    </ol>
+                </div>
+            </article>
 
-                    <article class="card project reveal">
-                        <div class="project-art" aria-hidden="true">
-                            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+            <!-- Other work -->
+            <div class="wrap">
+                <div class="cases">
+                    <article class="case case--card reveal">
+                        <div class="case-art case-art--indic" aria-hidden="true">
+                            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
                                 <g class="wave">
-                                    <path d="M0 110 Q 25 30 50 110 T 100 110 T 150 110 T 200 110 T 250 110 T 300 110 T 350 110 T 400 110"/>
-                                    <path d="M0 110 Q 25 70 50 110 T 100 110 T 150 110 T 200 110 T 250 110 T 300 110 T 350 110 T 400 110"/>
-                                    <path d="M0 110 Q 25 170 50 110 T 100 110 T 150 110 T 200 110 T 250 110 T 300 110 T 350 110 T 400 110"/>
+                                    <path d="M0 120 Q 25 40 50 120 T 100 120 T 150 120 T 200 120 T 250 120 T 300 120 T 350 120 T 400 120"/>
+                                    <path d="M0 120 Q 25 80 50 120 T 100 120 T 150 120 T 200 120 T 250 120 T 300 120 T 350 120 T 400 120"/>
+                                    <path d="M0 120 Q 25 180 50 120 T 100 120 T 150 120 T 200 120 T 250 120 T 300 120 T 350 120 T 400 120"/>
                                 </g>
-                                <text x="24" y="44">हिन्दी</text>
-                                <text x="168" y="196">বাংলা</text>
-                                <text x="300" y="48">मराठी</text>
+                                <text x="28" y="56">हिन्दी</text>
+                                <text x="168" y="212">বাংলা</text>
+                                <text x="292" y="60">मराठी</text>
                             </svg>
                         </div>
-                        <div class="project-body">
-                            <div class="project-meta"><span>YellowSense</span><span>2024</span></div>
-                            <h3>Generative AI for Indic Languages</h3>
+                        <div class="case-body">
+                            <p class="case-meta"><span class="case-letter">B</span><span>YellowSense</span><span>2024</span></p>
+                            <h3 class="case-title-sm">Generative AI for Indic languages</h3>
                             <p>LLMs with speech-to-text and text-to-speech for Hindi, Bengali and Marathi, paired with an AI-driven recommendation engine for household services.</p>
-                            <ul class="chips">
-                                <li>Generative AI</li><li>LLM</li><li>TTS / STT</li><li>RecSys</li><li>Backend</li>
-                            </ul>
-                            <p class="project-link project-link--muted">Private codebase</p>
+                            <ul class="tags"><li>Generative AI</li><li>LLM</li><li>TTS / STT</li><li>RecSys</li><li>Backend</li></ul>
+                            <p class="case-link case-link--muted">Private codebase</p>
                         </div>
                     </article>
 
-                    <article class="card project reveal">
-                        <div class="project-art" aria-hidden="true">
-                            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+                    <a class="case case--card case--link reveal" href="https://github.com/THEIOTGUY/TherapyLLM" target="_blank" rel="noopener">
+                        <div class="case-art case-art--chat" aria-hidden="true">
+                            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
                                 <g class="bubbles">
-                                    <rect x="30" y="32" width="180" height="40" rx="20"/>
-                                    <rect x="190" y="90" width="180" height="40" rx="20" class="accent"/>
-                                    <rect x="30" y="148" width="130" height="40" rx="20"/>
+                                    <rect x="36" y="38" width="190" height="42" rx="21"/>
+                                    <rect x="176" y="100" width="190" height="42" rx="21" class="accent"/>
+                                    <rect x="36" y="162" width="130" height="42" rx="21"/>
                                 </g>
                                 <g class="dots">
-                                    <circle cx="185" cy="168" r="5"/><circle cx="205" cy="168" r="5"/><circle cx="225" cy="168" r="5"/>
+                                    <circle cx="192" cy="183" r="5"/><circle cx="212" cy="183" r="5"/><circle cx="232" cy="183" r="5"/>
                                 </g>
                             </svg>
                         </div>
-                        <div class="project-body">
-                            <div class="project-meta"><span>Exhibited at IETE</span><span>2023</span></div>
-                            <h3>Therapy-LLM</h3>
-                            <p>A real-time therapy assistant that pairs Llama 2-7B with a fine-tuned model to deliver empathetic, human-like responses for mental-health support.</p>
-                            <ul class="chips">
-                                <li>Python</li><li>PyTorch</li><li>Llama 2</li><li>Fine-tuning</li>
-                            </ul>
-                            <a class="project-link" href="https://github.com/THEIOTGUY/TherapyLLM" target="_blank" rel="noopener">View on GitHub <span aria-hidden="true">↗</span></a>
+                        <div class="case-body">
+                            <p class="case-meta"><span class="case-letter">C</span><span>Exhibited at IETE</span><span>2023</span></p>
+                            <h3 class="case-title-sm">Therapy-LLM</h3>
+                            <p>A real-time therapy assistant that pairs Llama 2-7B with a fine-tuned model to give empathetic, human-like responses for mental-health support.</p>
+                            <ul class="tags"><li>Python</li><li>PyTorch</li><li>Llama 2</li><li>Fine-tuning</li></ul>
+                            <p class="case-link">View on GitHub <span class="arr" aria-hidden="true">↗</span></p>
                         </div>
-                    </article>
+                    </a>
                 </div>
             </div>
         </section>
 
         <!-- Skills -->
         <section class="section" id="skills">
-            <div class="wrap">
-                <header class="sec-head reveal">
-                    <p class="eyebrow"><span>04</span>Skills</p>
-                    <h2 class="sec-title">Tools I work with.</h2>
+            <div class="wrap grid">
+                <header class="sec-label reveal">
+                    <p class="idx">04</p>
+                    <p>Skills</p>
                 </header>
 
-                <div class="skills">
-                    <article class="card skill reveal">
-                        <span class="mini-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7-4.7-1.8 4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></span>
-                        <h3>AI / ML</h3>
-                        <ul class="chips">
-                            <li>Large language models</li><li>Training &amp; fine-tuning</li><li>NLP &amp; speech (TTS / STT)</li><li>PyTorch</li><li>OpenCV</li>
-                        </ul>
-                    </article>
-                    <article class="card skill reveal">
-                        <span class="mini-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
-                        <h3>Robotics &amp; vision</h3>
-                        <ul class="chips">
-                            <li>Computer vision</li><li>3D Gaussian Splatting</li><li>360° / omnidirectional vision</li><li>Obstacle detection</li>
-                        </ul>
-                    </article>
-                    <article class="card skill reveal">
-                        <span class="mini-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span>
-                        <h3>Backend &amp; data</h3>
-                        <ul class="chips">
-                            <li>API &amp; backend development</li><li>Python</li><li>Pandas</li><li>NumPy</li><li>SQL</li><li>Data analysis</li>
-                        </ul>
-                    </article>
-                    <article class="card skill reveal">
-                        <span class="mini-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a5 5 0 0 1-.9-9.9A6 6 0 0 1 17.7 9 4.5 4.5 0 0 1 17 18z"/></svg></span>
-                        <h3>Platforms</h3>
-                        <ul class="chips">
-                            <li>Google Cloud Platform</li><li>Firebase</li><li>Git &amp; GitHub</li><li>Tableau</li><li>Power BI</li>
-                        </ul>
-                    </article>
-                </div>
+                <div class="sec-body">
+                    <h2 class="display sec-title reveal">The <em>toolkit</em>.</h2>
 
-                <h3 class="sub-head reveal">Certifications</h3>
-                <ul class="certs">
-                    <li class="card cert reveal">
-                        <span class="cert-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg></span>
-                        <div><p class="cert-name">GATE 2024 — Data Science &amp; AI (Qualified)</p><p class="cert-src">IISc Bangalore</p></div>
-                    </li>
-                    <li class="card cert reveal">
-                        <span class="cert-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg></span>
-                        <div><p class="cert-name">Big Data &amp; Machine Learning Fundamentals</p><p class="cert-src">Google Cloud</p></div>
-                    </li>
-                    <li class="card cert reveal">
-                        <span class="cert-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg></span>
-                        <div><p class="cert-name">Perform Foundational Infrastructure Tasks</p><p class="cert-src">Google Cloud</p></div>
-                    </li>
-                    <li class="card cert reveal">
-                        <span class="cert-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg></span>
-                        <div><p class="cert-name">Introduction to Artificial Intelligence</p><p class="cert-src">Coursera</p></div>
-                    </li>
-                </ul>
+                    <div class="skills">
+                        <div class="skill reveal">
+                            <h3>AI / ML</h3>
+                            <ul><li>Large language models</li><li>Training &amp; fine-tuning</li><li>NLP &amp; speech (TTS / STT)</li><li>PyTorch</li><li>OpenCV</li></ul>
+                        </div>
+                        <div class="skill reveal">
+                            <h3>Robotics &amp; vision</h3>
+                            <ul><li>Computer vision</li><li>3D Gaussian Splatting</li><li>360° / omnidirectional vision</li><li>Obstacle detection</li></ul>
+                        </div>
+                        <div class="skill reveal">
+                            <h3>Backend &amp; data</h3>
+                            <ul><li>API &amp; backend development</li><li>Python</li><li>Pandas · NumPy</li><li>SQL</li><li>Data analysis</li></ul>
+                        </div>
+                        <div class="skill reveal">
+                            <h3>Platforms</h3>
+                            <ul><li>Google Cloud Platform</li><li>Firebase</li><li>Git &amp; GitHub</li><li>Tableau</li><li>Power BI</li></ul>
+                        </div>
+                    </div>
+
+                    <h3 class="sub-head reveal">Certifications</h3>
+                    <ul class="certs">
+                        <li class="reveal"><span class="cert-name">GATE 2024 — Data Science &amp; AI (Qualified)</span><span class="cert-src">IISc Bangalore</span></li>
+                        <li class="reveal"><span class="cert-name">Big Data &amp; Machine Learning Fundamentals</span><span class="cert-src">Google Cloud</span></li>
+                        <li class="reveal"><span class="cert-name">Perform Foundational Infrastructure Tasks</span><span class="cert-src">Google Cloud</span></li>
+                        <li class="reveal"><span class="cert-name">Introduction to Artificial Intelligence</span><span class="cert-src">Coursera</span></li>
+                    </ul>
+                </div>
             </div>
         </section>
 
         <!-- Contact -->
-        <section class="section" id="contact">
+        <section class="section contact" id="contact">
             <div class="wrap">
-                <div class="card contact-card reveal">
-                    <span class="glow glow-c" aria-hidden="true"></span>
-                    <p class="eyebrow"><span>05</span>Contact</p>
-                    <h2 class="contact-title">Have an idea worth <span class="grad-text">building?</span><br>Let's talk.</h2>
-                    <p class="contact-note">I'm open to new projects, research collaborations and opportunities.</p>
-                    <div class="contact-row">
-                        <a class="btn btn-primary btn-lg" href="mailto:vaidandeayush.av@gmail.com">vaidandeayush.av@gmail.com</a>
-                        <button class="btn btn-ghost btn-lg" id="copy-email" type="button" data-email="vaidandeayush.av@gmail.com">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-                            Copy email
-                        </button>
-                    </div>
-                    <ul class="socials">
-                        <li><a href="https://www.linkedin.com/in/ayush-vaidande-383998218/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
-                        <li><a href="https://github.com/THEIOTGUY" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
-                        <li><a href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a></li>
-                    </ul>
+                <p class="sec-label sec-label--inline reveal"><span class="idx">05</span>Contact</p>
+                <h2 class="display contact-title reveal">Have an idea worth <em>building</em>? Let's talk.</h2>
+                <p class="contact-note reveal">I'm open to new projects, research collaborations and opportunities.</p>
+
+                <div class="contact-mail reveal">
+                    <a class="mail" href="mailto:vaidandeayush.av@gmail.com">vaidandeayush.av<wbr>@gmail.com<span class="arr" aria-hidden="true">→</span></a>
+                    <button class="btn btn-line btn-sm" id="copy-email" type="button" data-email="vaidandeayush.av@gmail.com">Copy</button>
                 </div>
+
+                <ul class="socials reveal">
+                    <li><a href="https://www.linkedin.com/in/ayush-vaidande-383998218/" target="_blank" rel="noopener"><span>LinkedIn</span><span aria-hidden="true">↗</span></a></li>
+                    <li><a href="https://github.com/THEIOTGUY" target="_blank" rel="noopener"><span>GitHub</span><span aria-hidden="true">↗</span></a></li>
+                    <li><a href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" rel="noopener"><span>Résumé</span><span aria-hidden="true">↗</span></a></li>
+                </ul>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
         <div class="wrap footer-inner">
-            <span>© <span id="year">2026</span> Ayush Vaidande</span>
-            <span class="muted">Hero art rendered live as Gaussian splats</span>
+            <p>© <span id="year">2026</span> Ayush Vaidande</p>
+            <p class="colophon">Set in Instrument Serif, Inter Tight &amp; JetBrains Mono. Fig. 1 is rendered live as Gaussian splats.</p>
             <a href="#top">Back to top ↑</a>
         </div>
     </footer>
