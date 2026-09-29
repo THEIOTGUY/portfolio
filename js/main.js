@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const root = document.documentElement;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // --- Hero splat-map simulation ---
+    // --- Fig. 1: splat-map simulation ---
     const scene = window.createSplatScene(
         document.getElementById('map-canvas'),
-        document.getElementById('cam-canvas'),
+        null,
         {
             splats: document.getElementById('hud-splats'),
             obs: document.getElementById('hud-obs'),
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reduceMotion
     );
 
-    // --- Theme toggle (dark by default) ---
+    // --- Theme: follows the system until the visitor picks one ---
     const themeToggle = document.getElementById('theme-toggle');
     const themeMeta = document.querySelector('meta[name="theme-color"]');
     const applyTheme = (theme) => {
@@ -24,19 +24,31 @@ document.addEventListener('DOMContentLoaded', () => {
         themeMeta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
         scene.refreshColors();
     };
-    applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark');
+    applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
     themeToggle.addEventListener('click', () => {
         const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
         applyTheme(next);
         try { localStorage.setItem('theme', next); } catch (e) {}
     });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        let saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (err) {}
+        if (!saved) applyTheme(e.matches ? 'dark' : 'light');
+    });
 
-    // --- Header background + reading progress ---
+    // --- Local time in Mandi ---
+    const clock = document.getElementById('clock');
+    const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' });
+    const tick = () => { clock.textContent = `${fmt.format(new Date())} IST`; };
+    tick();
+    setInterval(tick, 15000);
+
+    // --- Header rule + reading progress ---
     const header = document.querySelector('.site-header');
     const progress = document.getElementById('progress');
     const onScroll = () => {
         header.classList.toggle('scrolled', window.scrollY > 8);
-        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const max = root.scrollHeight - window.innerHeight;
         progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
     };
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -50,16 +62,15 @@ document.addEventListener('DOMContentLoaded', () => {
         nav.classList.toggle('open', open);
         menuBtn.setAttribute('aria-expanded', String(open));
         menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        document.body.style.overflow = open ? 'hidden' : '';
     };
     menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
-    document.addEventListener('click', (e) => {
-        if (nav.classList.contains('open') && !nav.contains(e.target) && !menuBtn.contains(e.target)) setMenu(false);
-    });
+    window.matchMedia('(min-width: 861px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
 
     // --- Active nav link ---
-    const navLinks = [...nav.querySelectorAll('.nav-link')];
+    const navLinks = [...nav.querySelectorAll('.nav-link[href^="#"]')];
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (!entry.isIntersecting) return;
@@ -74,8 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const reveals = document.querySelectorAll('.reveal');
     reveals.forEach(el => {
         const siblings = [...el.parentElement.children].filter(c => c.classList.contains('reveal'));
-        el.style.setProperty('--d', `${Math.min(siblings.indexOf(el), 5) * 70}ms`);
-        // Drop the stagger once revealed so hover transitions respond immediately
+        el.style.setProperty('--d', `${Math.min(siblings.indexOf(el), 5) * 80}ms`);
         el.addEventListener('transitionend', (e) => {
             if (e.propertyName === 'opacity' && el.classList.contains('in')) el.style.setProperty('--d', '0s');
         });
@@ -90,17 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(el => revealObserver.observe(el));
 
-    // --- Cursor spotlight on cards ---
-    if (window.matchMedia('(hover: hover)').matches) {
-        document.addEventListener('pointermove', (e) => {
-            const card = e.target.closest && e.target.closest('.card');
-            if (!card) return;
-            const r = card.getBoundingClientRect();
-            card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-            card.style.setProperty('--my', `${e.clientY - r.top}px`);
-        }, { passive: true });
-    }
-
     // --- Copy email ---
     const toast = document.getElementById('toast');
     let toastTimer;
@@ -110,10 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
     };
-    document.getElementById('copy-email').addEventListener('click', async (e) => {
-        const email = e.currentTarget.dataset.email;
+    const copyBtn = document.getElementById('copy-email');
+    copyBtn.addEventListener('click', async () => {
+        const email = copyBtn.dataset.email;
         try {
             await navigator.clipboard.writeText(email);
+            copyBtn.textContent = 'Copied';
+            setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1800);
             showToast('Email copied to clipboard');
         } catch (err) {
             window.location.href = `mailto:${email}`;
