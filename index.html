@@ -1,448 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayush Vaidande — AI & Robotics Researcher</title>
-    <meta name="description" content="Portfolio of Ayush Vaidande, AI & Robotics researcher at CAIR, IIT Mandi. Camera-only perception for mobile robots, 3D vision, large language models, speech and backend engineering.">
-    <meta property="og:title" content="Ayush Vaidande — AI & Robotics Researcher">
-    <meta property="og:description" content="Teaching robots to see with a single 360° camera. AI & Robotics researcher at CAIR, IIT Mandi.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://theiotguy.github.io/portfolio/">
-    <meta name="theme-color" content="#f1efe8">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23151513'/><circle cx='74' cy='28' r='9' fill='%23e5461f'/><text x='44' y='70' text-anchor='middle' font-size='54' font-style='italic' font-family='Georgia,serif' fill='%23f1efe8'>a</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <script>
-        // Resolve the theme before first paint: saved choice, else the system setting
-        document.documentElement.classList.add('js');
-        (function () {
-            var t = null;
-            try { t = localStorage.getItem('theme'); } catch (e) {}
-            if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            document.documentElement.dataset.theme = t;
-        })();
-    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Ayush Vaidande — AI Researcher · Multimodal Systems &amp; Robotics</title>
+  <meta name="description" content="Ayush Vaidande is an AI and robotics researcher at IIT Mandi, building multimodal LLMs, retrieval-augmented AI, robot perception, and GPU-trained navigation systems. Explore research, projects, publications, and resume.">
+  <meta name="theme-color" content="#f1efe9">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ayush Vaidande — AI Research & Engineering">
+  <meta property="og:description" content="Multimodal LLMs, retrieval systems, robot navigation and AI infrastructure. Research and projects by Ayush Vaidande.">
+  <meta property="og:url" content="https://theiotguy.github.io/portfolio/">
+  <link rel="canonical" href="https://theiotguy.github.io/portfolio/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23181919'/%3E%3Ctext x='32' y='47' font-family='Georgia' font-size='50' font-style='italic' text-anchor='middle' fill='%23f1efe9'%3Ea%3C/text%3E%3Ccircle cx='47' cy='16' r='6' fill='%23b83d20'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    document.documentElement.classList.add('js');
+    (() => {try {let theme=localStorage.getItem('theme');if(theme!=='light'&&theme!=='dark')theme=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=theme;}catch(e){document.documentElement.dataset.theme='light';}})();
+  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Ayush Ravindra Vaidande","url":"https://theiotguy.github.io/portfolio/","email":"mailto:s25165@students.iitmandi.ac.in","alumniOf":{"@type":"CollegeOrUniversity","name":"Shivajirao Jondhale College of Engineering"},"affiliation":{"@type":"CollegeOrUniversity","name":"Indian Institute of Technology Mandi"},"sameAs":["https://github.com/THEIOTGUY","https://www.linkedin.com/in/ayush-vaidande-383998218/"]}</script>
 </head>
 <body>
-    <a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Ayush Vaidande, home"><span class="brand-mark" aria-hidden="true">a<span class="brand-dot"></span></span><span class="brand-name">Ayush Vaidande</span></a>
+    <nav class="nav" id="nav" aria-label="Primary navigation">
+      <a class="nav-link" href="#about"><span>01</span>About</a>
+      <a class="nav-link" href="#experience"><span>02</span>Experience</a>
+      <a class="nav-link" href="#research"><span>03</span>Research</a>
+      <a class="nav-link" href="#work"><span>04</span>Projects</a>
+      <a class="nav-link" href="#skills"><span>05</span>Skills</a>
+      <a class="nav-link" href="#contact"><span>06</span>Contact</a>
+      <a class="nav-link mobile-resume" href="https://drive.google.com/file/d/1GcUx9p0rFMbqdpmThmN70M3OXyEjYob3/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">Résumé ↗</a>
+    </nav>
+    <div class="header-actions">
+      <a class="resume-link" href="https://drive.google.com/file/d/1GcUx9p0rFMbqdpmThmN70M3OXyEjYob3/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">Résumé <span aria-hidden="true">↗</span></a>
+      <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme" title="Toggle light and dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z"/></svg></button>
+      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+</header>
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero-meta reveal"><p>AI RESEARCH &amp; ENGINEERING<br><span>M.Tech (Research), IIT Mandi</span></p><p>BASED IN INDIA<br><span><time id="clock">IST</time> · local time</span></p><p class="hero-status"><span class="live-dot" aria-hidden="true"></span><span>Open to AI R&amp;D<br>collaborations &amp; roles</span></p></div>
+      <p class="hero-eyebrow reveal">Building models. Connecting modalities. Shipping systems.</p>
+      <h1 class="display hero-title" id="hero-title"><span class="line reveal">Intelligence</span><span class="line reveal">that <em>sees</em>, listens</span><span class="line reveal">and <em>acts.</em></span></h1>
+      <div class="hero-foot"><p class="hero-lede reveal">I'm <strong>Ayush Vaidande</strong> — an AI researcher and engineer working across <strong>multimodal LLMs</strong>, retrieval-augmented generation, speech, and embodied robotics. I train models and build the infrastructure that makes them useful.</p><div class="hero-cta reveal"><a class="btn btn-solid" href="#work">Explore my work <span class="arr" aria-hidden="true">↗</span></a><a class="btn btn-line" href="https://drive.google.com/file/d/1GcUx9p0rFMbqdpmThmN70M3OXyEjYob3/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">View résumé <span class="arr" aria-hidden="true">↗</span></a></div></div>
+      <div class="impact reveal" aria-label="Highlights"><div><strong>1</strong><span>Accepted research paper</span></div><div><strong>59.4%</strong><span>Reported navigation success · RxR Val-Unseen</span></div><div><strong>807K</strong><span>Therapy QA pairs indexed for RAG</span></div><div><strong>GATE '25</strong><span>Qualified · Data Science & AI</span></div></div>
+    </div>
+    <figure class="fig reveal"><div class="wrap"><div class="fig-frame"><canvas id="map-canvas" role="img" aria-label="Interactive stylized 3D point-cloud visualization of a robot mapping an indoor environment. Drag to orbit the view."></canvas><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div class="fig-overlay"><span class="fig-tag"><span class="rec" aria-hidden="true"></span>INTERACTIVE RESEARCH SKETCH · 3DGS</span><span class="fig-hint">Drag to orbit</span></div></div><div class="fig-bar"><figcaption><span class="fig-no">FIG 01</span> A browser-rendered illustration of a robot constructing a spatial map. <strong>Concept visualization, not experimental footage.</strong> <a href="#research">Explore the research ↗</a></figcaption><dl class="readout"><div><dt>Splats</dt><dd id="hud-splats">—</dd></div><div><dt>Obstacles</dt><dd id="hud-obs">—</dd></div><div><dt>Robot pose</dt><dd id="hud-pose">—</dd></div><div><dt>Time</dt><dd id="hud-time">—</dd></div></dl></div></div></figure>
+  </section>
 
-    <header class="site-header">
-        <div class="wrap header-inner">
-            <a href="#top" class="brand" aria-label="Ayush Vaidande, back to top">
-                <span class="brand-mark" aria-hidden="true">a<i></i></span>
-                <span class="brand-name">Ayush Vaidande</span>
-            </a>
+  <section class="section" id="about" aria-labelledby="about-head"><div class="wrap grid"><div class="sec-label reveal"><span class="idx">01 /</span><span>ABOUT</span></div><div class="sec-body"><h2 class="display section-title reveal" id="about-head">Research depth.<br><em>Engineering breadth.</em></h2><div class="prose-cols"><p class="reveal">My work sits at the intersection of <strong>language, perception, and robotics</strong>. I'm pursuing an M.Tech (Research) in Artificial Intelligence and Robotics at IIT Mandi, with an earlier background in electronics and telecommunications.</p><p class="reveal">At IIT Mandi's CAIR, I contributed to description-first indoor navigation and authored research. Beyond robotics, I build conversational and audio-language AI, from fine-tuning and semantic retrieval to multi-GPU training and inference deployment.</p></div><div class="facts reveal"><div><span class="fact-label">CURRENT STUDY</span><strong>M.Tech (Research)</strong><span>IIT Mandi · 2025–2027 expected</span></div><div><span class="fact-label">PRIOR DEGREE</span><strong>B.E., Electronics & Telecom</strong><span>AI/ML specialization · 2024</span></div><div><span class="fact-label">RESEARCH INTERNSHIP</span><strong>CAIR, IIT Mandi</strong><span>May 2025 – Jan 2026</span></div></div></div></div></section>
 
-            <nav class="nav" id="nav" aria-label="Primary">
-                <a href="#about" class="nav-link"><span>01</span>About</a>
-                <a href="#experience" class="nav-link"><span>02</span>Experience</a>
-                <a href="#work" class="nav-link"><span>03</span>Work</a>
-                <a href="#skills" class="nav-link"><span>04</span>Skills</a>
-                <a href="#contact" class="nav-link"><span>05</span>Contact</a>
-                <a class="nav-link nav-resume" href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" rel="noopener"><span>↗</span>Résumé</a>
-            </nav>
+  <section class="section" id="experience" aria-labelledby="experience-head"><div class="wrap grid"><div class="sec-label reveal"><span class="idx">02 /</span><span>EXPERIENCE</span></div><div class="sec-body"><h2 class="display section-title reveal" id="experience-head">Where I've <em>worked.</em></h2><div class="timeline">
+    <article class="job reveal"><div class="job-date">MAY 2025 — JAN 2026</div><div class="job-main"><h3>Research Intern</h3><p class="job-org">Centre for Artificial Intelligence &amp; Robotics · IIT Mandi</p><p>Contributed to <strong>CapNav</strong>, combining RGB-D semantic mapping, open-vocabulary detection, persistent 3D objects and language-grounded retrieval for indoor navigation. Second author on the accepted ICCCMLA 2026 paper.</p><ul class="tags"><li>Semantic mapping</li><li>Detic</li><li>LSeg</li><li>Gemini</li><li>BGE-M3</li></ul></div></article>
+    <article class="job reveal"><div class="job-date">FEB — MAY 2024</div><div class="job-main"><h3>AI/ML &amp; Backend Engineer</h3><p class="job-org">YellowSense Technologies <span class="footnote-mark">· Listed on previous portfolio</span></p><p>Worked on LLM-based speech-to-text and text-to-speech for Indic languages, household-services recommendations, and supporting APIs and databases.</p><ul class="tags"><li>LLMs</li><li>Speech AI</li><li>Backend</li></ul></div></article>
+    <article class="job reveal"><div class="job-date">JUN — JUL 2023</div><div class="job-main"><h3>Machine Learning Intern</h3><p class="job-org">Techno Hacks Edu Tech</p><p>Developed heart-disease risk classifiers with Logistic Regression, Random Forest, SVM and XGBoost. Previous resume reports <strong>96.70% accuracy</strong>; applied preprocessing, cross-validation and model evaluation.</p><ul class="tags"><li>scikit-learn</li><li>XGBoost</li><li>Model evaluation</li></ul></div></article>
+    <article class="job reveal"><div class="job-date">JAN — MAY 2023</div><div class="job-main"><h3>Data Analyst Intern</h3><p class="job-org">Trainity</p><p>Analyzed recruitment datasets and built SQL-, Python- and Power BI/Tableau-based reports for time-to-hire, candidate conversion and sourcing efficiency.</p><ul class="tags"><li>SQL</li><li>pandas</li><li>Power BI</li><li>Tableau</li></ul></div></article>
+    <article class="job reveal"><div class="job-date">FEB — APR 2022</div><div class="job-main"><h3>Python Intern</h3><p class="job-org">Bloomzen Infosolutions Pvt. Ltd.</p><p>Developed Python workflows and integrations using pandas, NumPy, MQTT, SMTP and Firebase, with source control in Git.</p><ul class="tags"><li>Python</li><li>Firebase</li><li>MQTT</li></ul></div></article>
+  </div></div></div></section>
 
-            <div class="header-actions">
-                <a class="resume-link" href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
-                <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch theme">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" class="fill"/></svg>
-                </button>
-                <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
-                    <span></span><span></span>
-                </button>
-            </div>
-        </div>
-        <div class="progress" id="progress" aria-hidden="true"></div>
-    </header>
+  <section class="section research-section" id="research" aria-labelledby="research-head"><div class="wrap grid"><div class="sec-label reveal"><span class="idx">03 /</span><span>RESEARCH</span></div><div class="sec-body"><h2 class="display section-title reveal" id="research-head">Questions worth <em>exploring.</em></h2><p class="section-note reveal">Research across semantic indoor navigation and panoramic robot localization.</p>
+    <article class="research-paper reveal"><div class="paper-index">PAPER 01 <span class="paper-status">ACCEPTED · ICCCMLA 2026</span></div><h3>CapNav: Description-First Indoor Navigation with Instance-Level Semantic Maps</h3><p>Second author · IEEE 8th International Conference on Cybernetics, Cognition and Machine Learning Applications · Paper ID #009823.</p><p>Built around instance-level semantic maps: Detic detections and LSeg visual features are assembled into tracked 3D objects; object captions and BGE-M3 semantic retrieval connect natural-language descriptions to navigation targets, with A* for path planning.</p><div class="method-row"><span>Detic / LSeg</span><span>3D object tracking</span><span>Gemini captioning</span><span>BGE-M3</span><span>A* planning</span></div><details class="research-note"><summary>Earlier manuscript evaluation details</summary><p>An earlier, rejected conference draft reported 56.6% independent subgoal success versus 48.1% for VLMaps on 364 <strong>category-only</strong> subgoals. This is not presented as a separately accepted paper or independently verified final ICCCMLA result.</p><a href="https://openreview.net/pdf?id=zZvrFzDkwF" target="_blank" rel="noopener noreferrer">Read earlier technical draft ↗</a></details></article>
+    <article class="research-paper reveal"><div class="paper-index">PAPER 02 <span class="paper-status review">SUBMITTED · ICRA 2027</span></div><h3>Knowing When to Relocalize: View-Spread Gating for Onboard Panoramic Localization</h3><p>Research on deciding when onboard panoramic relocalization is warranted by using view-spread gating. <strong>Submitted to ICRA 2027; under review.</strong> No acceptance claim is made.</p><div class="method-row"><span>Panoramic vision</span><span>Robot localization</span><span>Relocalization</span></div></article>
+  </div></div></section>
 
-    <main id="main">
-        <!-- Hero -->
-        <section class="hero" id="top">
-            <div class="wrap">
-                <div class="hero-meta reveal">
-                    <p>AI &amp; Robotics Researcher<br><span>CAIR, IIT Mandi</span></p>
-                    <p>Mandi, Himachal Pradesh<br><span><time id="clock">IST</time> local time</span></p>
-                    <p class="hero-status"><span class="live-dot" aria-hidden="true"></span>Open to research <br>collaborations</p>
-                </div>
+  <section class="section projects-section" id="work" aria-labelledby="work-head"><div class="wrap grid"><div class="sec-label reveal"><span class="idx">04 /</span><span>SELECTED WORK</span></div><div class="sec-body"><h2 class="display section-title reveal" id="work-head">Built, tested,<br><em>deployed.</em></h2><p class="section-note reveal">Hands-on projects covering reinforcement learning, LLM fine-tuning, multimodal retrieval and computer vision.</p></div></div>
+  <div class="wrap">
+    <article class="feature-project reveal" id="project-vln"><div class="feature-copy"><div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> FEATURED / HACKATHON WINNER · APR 2026</div><h3 class="display">VLN-<em>GRPO.</em></h3><p class="feature-sub">Teaching vision-language agents to navigate with reinforcement learning.</p><p>Led a <strong>10-member team</strong> to win the IIT Mandi CS671 Deep Learning Hackathon among <strong>420 participants</strong>. Trained Qwen2.5-VL-3B with imitation learning and GRPO across four GPUs, and served inference through vLLM. The repository reports <strong>59.4% success</strong> and <strong>4.09 m navigation error</strong> on RxR Val-Unseen.</p><ul class="tags"><li>Qwen2.5-VL-3B</li><li>GRPO</li><li>4 GPUs</li><li>Habitat</li><li>vLLM</li><li>Ray</li></ul><div class="project-actions"><a class="btn btn-solid" href="https://github.com/THEIOTGUY/VLN-GRPO" target="_blank" rel="noopener noreferrer">Explore code ↗</a><a class="btn btn-line" href="https://drive.google.com/file/d/15JzGiJpku2RAGnERenPym_cz7Lz4FsfA/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">Watch demo ↗</a></div></div><div class="feature-visual" aria-label="Illustration of a navigation grid with a highlighted path"><div class="grid-art"><span class="grid-robot">◉</span><span class="grid-goal">◎</span><svg viewBox="0 0 440 400" aria-hidden="true" preserveAspectRatio="none"><path d="M35 328 L98 328 L98 268 L157 268 L157 213 L236 213 L236 145 L319 145 L319 72 L385 72" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" stroke-dasharray="7 10"/><circle cx="35" cy="328" r="8" fill="currentColor"/><circle cx="385" cy="72" r="12" fill="none" stroke="currentColor" stroke-width="4"/></svg><div class="art-label">OBSERVATION → POLICY → ACTION</div></div><div class="feature-stat"><strong>+19.1<span> pp</span></strong><span>Reported success-rate gain from imitation-learning initialization</span></div></div></article>
+    <div class="project-grid">
+      <article class="project-card reveal"><div class="card-art card-art-therapy" aria-hidden="true"><div class="chat-bubble left">How can I describe how I feel?</div><div class="chat-bubble right">Let's explore that together.</div><div class="signal">﹏﹏﹏﹏﹏</div></div><div class="project-info"><div class="eyebrow">01 / GENERATIVE AI · 2023–2024</div><h3>Therapy<em>LLM</em></h3><p>Led development of a real-time LLaMA 2-7B assistant, fine-tuned with LoRA/PEFT and 4-bit quantization on 1,000 curated dialogues. Built FAISS RAG with 807K Q&A pairs; integrated ASR, speech output, NVIDIA Audio2Face and generated reports. Exhibited at IETE Mumbai Project Expo 2024.</p><ul class="tags"><li>LLaMA 2</li><li>LoRA / PEFT</li><li>FAISS RAG</li><li>Audio2Face</li></ul><a class="case-link" href="https://github.com/THEIOTGUY/TherapyLLM" target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a></div></article>
+      <article class="project-card reveal"><div class="card-art card-art-audio" aria-hidden="true"><div class="audio-bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="art-trace"><span>AUDIO</span><span>→ CAPTION</span><span>→ MAP</span></div></div><div class="project-info"><div class="eyebrow">02 / AUDIO-LANGUAGE REASONING</div><h3>Text<em>Bridge</em></h3><p>Used Qwen2.5-Omni-7B to caption audio, then Sentence-BERT to compare those captions with natural-language instructions. Built semantic retrieval scores and indoor-navigation heatmaps; repository includes real-scene benchmarking.</p><ul class="tags"><li>Qwen2.5-Omni</li><li>Sentence-BERT</li><li>Semantic retrieval</li></ul><a class="case-link" href="https://github.com/THEIOTGUY/multimodal" target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a></div></article>
+      <article class="project-card reveal"><div class="card-art card-art-vision" aria-hidden="true"><div class="plate-box"><span class="target-corner tl"></span><span class="target-corner tr"></span><span class="target-corner bl"></span><span class="target-corner br"></span><span>OBJECT → PLATE → TEXT</span></div><div class="art-label">VISION PIPELINE</div></div><div class="project-info"><div class="eyebrow">03 / COMPUTER VISION</div><h3>License Plate <em>Detection</em></h3><p>GPU-trained YOLOv8n for 100 epochs on 21,173 training images, bringing vehicle tracking, plate detection and OCR together in a video-processing pipeline.</p><ul class="tags"><li>YOLOv8n</li><li>Tracking</li><li>OCR</li><li>OpenCV</li></ul><a class="case-link" href="https://github.com/THEIOTGUY/yolov8_car_number_plate_detection" target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a></div></article>
+      <article class="project-card reveal"><div class="card-art card-art-research" aria-hidden="true"><svg viewBox="0 0 460 220"><g fill="none" stroke="currentColor"><path d="M35 165L100 135 140 160 200 90 265 112 320 52 420 67" stroke-width="2"/><path d="M35 135L100 105 140 130 200 60 265 82 320 22 420 37" stroke-width="1" opacity=".35"/></g><g fill="currentColor"><circle cx="100" cy="135" r="5"/><circle cx="200" cy="90" r="6"/><circle cx="320" cy="52" r="7"/></g></svg><div class="art-label">PANORAMIC LOCALIZATION</div></div><div class="project-info"><div class="eyebrow">04 / ROBOTICS & 3D VISION</div><h3>Onboard <em>Localization</em></h3><p>Research into panoramic robot localization and view-spread gating for deciding when to relocalize. Manuscript submitted to ICRA 2027; under review.</p><ul class="tags"><li>Panoramic camera</li><li>Relocalization</li><li>3D vision</li></ul><a class="case-link" href="#research">Research details ↗</a></div></article>
+    </div>
+  </div></section>
 
-                <h1 class="display hero-title">
-                    <span class="line reveal">Teaching robots</span>
-                    <span class="line reveal">to <em>see</em> the world</span>
-                    <span class="line reveal">with a single camera.</span>
-                </h1>
+  <section class="section" id="skills" aria-labelledby="skills-head"><div class="wrap grid"><div class="sec-label reveal"><span class="idx">05 /</span><span>TOOLKIT</span></div><div class="sec-body"><h2 class="display section-title reveal" id="skills-head">Tools for the<br><em>whole pipeline.</em></h2><div class="skills-grid">
+    <div class="skill reveal"><h3>LLMs &amp; GenAI</h3><ul><li>PyTorch</li><li>LLaMA / Qwen VLMs</li><li>LoRA, PEFT, 4-bit quantization</li><li>LangChain, FAISS, RAG</li><li>ASR / speech interfaces</li></ul></div>
+    <div class="skill reveal"><h3>Training &amp; deployment</h3><ul><li>Four-GPU training</li><li>GRPO / imitation learning</li><li>vLLM inference</li><li>Docker, GCP, cloud deployments</li><li>Git, CUDA, Terraform</li></ul></div>
+    <div class="skill reveal"><h3>Robotics &amp; vision</h3><ul><li>Habitat / navigation</li><li>3D Gaussian Splatting</li><li>Detic, LSeg, BGE-M3</li><li>YOLOv8, OpenCV</li><li>Semantic maps &amp; 3D tracking</li></ul></div>
+    <div class="skill reveal"><h3>Data &amp; backend</h3><ul><li>Python, SQL, APIs</li><li>pandas, NumPy</li><li>Firebase, MQTT</li><li>Tableau / Power BI</li><li>Data pipelines &amp; evaluation</li></ul></div>
+  </div><div class="credentials reveal"><div><span class="fact-label">QUALIFICATION</span><strong>GATE 2025 · Data Science &amp; Artificial Intelligence</strong><span>Qualified in DA</span></div><div><span class="fact-label">CERTIFICATION</span><strong>Microsoft Azure AI Fundamentals</strong><span>Also: Machine Learning Specialization · Coursera</span></div></div></div></div></section>
 
-                <div class="hero-foot">
-                    <p class="hero-lede reveal">
-                        I'm <strong>Ayush Vaidande</strong>. I build AI that has to work outside the notebook:
-                        perception for autonomous mobile robots, language and speech models for Indic
-                        languages, and the backends that ship them.
-                    </p>
-                    <div class="hero-cta reveal">
-                        <a href="#work" class="btn btn-solid">Selected work <span class="arr" aria-hidden="true">→</span></a>
-                        <a href="#contact" class="btn btn-line">Get in touch</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Figure 1: the live splat-map simulation -->
-            <figure class="fig reveal">
-                <div class="wrap">
-                    <div class="fig-frame">
-                        <canvas id="map-canvas" role="img" aria-label="Animated Gaussian-splat map of a room being built by a small robot as it drives a figure-eight"></canvas>
-                        <span class="corner tl" aria-hidden="true"></span><span class="corner tr" aria-hidden="true"></span>
-                        <span class="corner bl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
-                        <p class="fig-tag"><span class="rec" aria-hidden="true"></span>Live · 3D Gaussian Splatting</p>
-                        <p class="fig-hint">Drag to orbit</p>
-                    </div>
-                    <div class="fig-bar">
-                        <figcaption>
-                            <span class="fig-no">Fig. 1</span>
-                            A robot maps a room using one 360° camera, then marks obstacles in the map.
-                            A running sketch of <a href="#project-amr">my current research</a>, rendered in your browser.
-                        </figcaption>
-                        <dl class="readout" aria-label="Simulation readout">
-                            <div><dt>Splats</dt><dd id="hud-splats">0</dd></div>
-                            <div><dt>Obstacles</dt><dd id="hud-obs">0</dd></div>
-                            <div><dt>Pose</dt><dd id="hud-pose">0.00, 0.00</dd></div>
-                            <div><dt>Clock</dt><dd id="hud-time">t 00:00.0</dd></div>
-                        </dl>
-                    </div>
-                </div>
-            </figure>
-        </section>
-
-        <!-- About -->
-        <section class="section" id="about">
-            <div class="wrap grid">
-                <header class="sec-label reveal">
-                    <p class="idx">01</p>
-                    <p>About</p>
-                </header>
-
-                <div class="sec-body">
-                    <p class="lead reveal">
-                        I started in electronics, moved through language models and speech,
-                        and now build <em>the eyes</em> of mobile robots.
-                    </p>
-
-                    <div class="prose cols reveal">
-                        <p>
-                            My degree is in Electronics &amp; Telecommunication with honours in AI/ML.
-                            It gave me a grounding in deep learning, NLP and computer vision, and in the
-                            signals and hardware that robotics runs on.
-                        </p>
-                        <p>
-                            Today I'm an AI &amp; Robotics researcher at CAIR, IIT Mandi. Before that, at
-                            YellowSense Technologies, I built generative models with speech-to-text and
-                            text-to-speech for Indic languages, along with the APIs and databases behind them.
-                            I'm driven by LLMs, AI research and well-engineered backends.
-                        </p>
-                    </div>
-
-                    <dl class="facts">
-                        <div class="reveal">
-                            <dt>Education</dt>
-                            <dd>B.E. Electronics &amp; Telecommunication<span>Honours in AI/ML</span></dd>
-                        </div>
-                        <div class="reveal">
-                            <dt>Currently</dt>
-                            <dd>AI &amp; Robotics Researcher<span>CAIR, IIT Mandi · since Jun 2024</span></dd>
-                        </div>
-                        <div class="reveal">
-                            <dt>Interests</dt>
-                            <dd>Robot perception, 3D vision<span>LLMs · Speech</span></dd>
-                        </div>
-                        <div class="reveal">
-                            <dt>Credential</dt>
-                            <dd>GATE 2024, DS &amp; AI<span>Qualified · IISc Bangalore</span></dd>
-                        </div>
-                    </dl>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience -->
-        <section class="section" id="experience">
-            <div class="wrap grid">
-                <header class="sec-label reveal">
-                    <p class="idx">02</p>
-                    <p>Experience</p>
-                </header>
-
-                <div class="sec-body">
-                    <h2 class="display sec-title reveal">Where I've <em>worked</em>.</h2>
-
-                    <ol class="ledger">
-                        <li class="ledger-row reveal">
-                            <p class="ledger-date"><span class="live-dot" aria-hidden="true"></span>Jun 2024 — Now</p>
-                            <div class="ledger-main">
-                                <h3>AI &amp; Robotics Researcher</h3>
-                                <p class="ledger-org">Centre for Artificial Intelligence &amp; Robotics, IIT Mandi</p>
-                            </div>
-                            <div class="ledger-detail">
-                                <p>Research on perception for autonomous mobile robots: building monocular 3D Gaussian Splatting maps from a single 360° camera and detecting obstacles for navigation.</p>
-                                <ul class="tags"><li>Robotics</li><li>360° vision</li><li>3DGS</li><li>Computer vision</li></ul>
-                            </div>
-                        </li>
-                        <li class="ledger-row reveal">
-                            <p class="ledger-date">Feb — May 2024</p>
-                            <div class="ledger-main">
-                                <h3>AI/ML &amp; Backend Engineer</h3>
-                                <p class="ledger-org">YellowSense Technologies</p>
-                            </div>
-                            <div class="ledger-detail">
-                                <p>Built generative LLMs with TTS/STT for Indic languages, an AI-driven recommendation system for household services, and the databases and APIs that serve them.</p>
-                                <ul class="tags"><li>LLM</li><li>TTS / STT</li><li>RecSys</li><li>Backend</li></ul>
-                            </div>
-                        </li>
-                        <li class="ledger-row reveal">
-                            <p class="ledger-date">Jun — Jul 2023</p>
-                            <div class="ledger-main">
-                                <h3>Machine Learning Intern</h3>
-                                <p class="ledger-org">Techno Hacks Edu Tech</p>
-                            </div>
-                            <div class="ledger-detail">
-                                <p>Data preprocessing, model development and collaborative problem-solving with Python and ML frameworks.</p>
-                                <ul class="tags"><li>Python</li><li>Machine learning</li></ul>
-                            </div>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-
-        <!-- Work -->
-        <section class="section" id="work">
-            <div class="wrap grid">
-                <header class="sec-label reveal">
-                    <p class="idx">03</p>
-                    <p>Selected work</p>
-                </header>
-
-                <div class="sec-body">
-                    <h2 class="display sec-title reveal">Things I've <em>built</em>.</h2>
-                </div>
-            </div>
-
-            <!-- Featured case study -->
-            <article class="case case--feature" id="project-amr">
-                <div class="wrap">
-                    <div class="case-head reveal">
-                        <p class="case-no">A</p>
-                        <div>
-                            <p class="case-meta"><span class="status"><span class="live-dot" aria-hidden="true"></span>Ongoing research</span><span>CAIR, IIT Mandi</span><span>2024 —</span></p>
-                            <h3 class="display case-title">Camera-only mapping for mobile robots</h3>
-                        </div>
-                    </div>
-
-                    <div class="case-intro">
-                        <p class="reveal">
-                            Autonomous mobile robots usually lean on LiDAR or depth sensors to understand a room.
-                            This work asks how far one 360° camera can go on its own. Monocular imagery is
-                            reconstructed into a 3D Gaussian Splatting map, and that map is used to detect
-                            obstacles for navigation.
-                        </p>
-                        <ul class="tags reveal"><li>360° vision</li><li>3D Gaussian Splatting</li><li>Monocular mapping</li><li>Obstacle detection</li><li>AMR</li></ul>
-                    </div>
-
-                    <ol class="pipeline" aria-label="Pipeline, from camera frame to navigation">
-                        <li class="stage reveal">
-                            <div class="stage-art" aria-hidden="true">
-                                <svg viewBox="0 0 200 120">
-                                    <path class="a-line" d="M50 0V120M100 0V120M150 0V120"/>
-                                    <path class="a-line a-dash" d="M0 60H200"/>
-                                    <path class="a-curve" d="M0 38Q50 14 100 38T200 38"/>
-                                    <path class="a-curve" d="M0 82Q50 106 100 82T200 82"/>
-                                    <rect class="a-box" x="118" y="44" width="30" height="30" rx="1"/>
-                                </svg>
-                            </div>
-                            <p class="stage-k"><span>a</span>Capture</p>
-                            <p class="stage-v">One equirectangular 360° frame. No LiDAR, no depth.</p>
-                        </li>
-                        <li class="stage reveal">
-                            <div class="stage-art" aria-hidden="true">
-                                <svg viewBox="0 0 200 120">
-                                    <g class="a-splats">
-                                        <ellipse cx="46" cy="78" rx="26" ry="9" transform="rotate(-12 46 78)" fill-opacity=".22"/>
-                                        <ellipse cx="80" cy="86" rx="30" ry="8" transform="rotate(6 80 86)" fill-opacity=".18"/>
-                                        <ellipse cx="128" cy="88" rx="34" ry="9" transform="rotate(-4 128 88)" fill-opacity=".2"/>
-                                        <ellipse cx="160" cy="78" rx="24" ry="8" transform="rotate(14 160 78)" fill-opacity=".16"/>
-                                        <ellipse cx="62" cy="46" rx="10" ry="22" transform="rotate(8 62 46)" fill-opacity=".3"/>
-                                        <ellipse cx="146" cy="42" rx="16" ry="10" transform="rotate(30 146 42)" fill-opacity=".24"/>
-                                        <ellipse cx="168" cy="48" rx="9" ry="14" transform="rotate(-10 168 48)" fill-opacity=".18"/>
-                                    </g>
-                                    <g class="a-splats-accent">
-                                        <ellipse cx="104" cy="56" rx="14" ry="22" transform="rotate(-6 104 56)" fill-opacity=".85"/>
-                                        <ellipse cx="118" cy="52" rx="9" ry="18" transform="rotate(12 118 52)" fill-opacity=".6"/>
-                                    </g>
-                                </svg>
-                            </div>
-                            <p class="stage-k"><span>b</span>Reconstruct</p>
-                            <p class="stage-v">Build a 3D Gaussian Splatting map from monocular imagery.</p>
-                        </li>
-                        <li class="stage reveal">
-                            <div class="stage-art" aria-hidden="true">
-                                <svg viewBox="0 0 200 120">
-                                    <defs>
-                                        <pattern id="occ-grid" width="15" height="15" patternUnits="userSpaceOnUse" x="10" y="10">
-                                            <path d="M15 0H0V15" class="a-gridline"/>
-                                        </pattern>
-                                    </defs>
-                                    <rect x="10" y="10" width="180" height="100" fill="url(#occ-grid)"/>
-                                    <rect class="a-unknown" x="145" y="10" width="45" height="30"/>
-                                    <rect class="a-occ" x="55" y="25" width="30" height="15"/>
-                                    <rect class="a-occ" x="115" y="55" width="15" height="30"/>
-                                    <circle class="a-range" cx="32" cy="62" r="20"/>
-                                    <circle class="a-robot" cx="32" cy="62" r="6"/>
-                                </svg>
-                            </div>
-                            <p class="stage-k"><span>c</span>Detect</p>
-                            <p class="stage-v">Find obstacles in the reconstructed map.</p>
-                        </li>
-                        <li class="stage reveal">
-                            <div class="stage-art" aria-hidden="true">
-                                <svg viewBox="0 0 200 120">
-                                    <rect x="10" y="10" width="180" height="100" fill="url(#occ-grid)" opacity=".6"/>
-                                    <rect class="a-occ" x="55" y="25" width="30" height="15"/>
-                                    <rect class="a-occ" x="115" y="55" width="15" height="30"/>
-                                    <path class="a-path" d="M32 62C60 62 80 56 96 48S110 34 140 36 172 44 176 28"/>
-                                    <circle class="a-robot" cx="32" cy="62" r="6"/>
-                                    <path class="a-flag" d="M176 28V12L188 17 176 22"/>
-                                </svg>
-                            </div>
-                            <p class="stage-k"><span>d</span>Navigate</p>
-                            <p class="stage-v">Plan a path around what the camera found.</p>
-                        </li>
-                    </ol>
-                </div>
-            </article>
-
-            <!-- Other work -->
-            <div class="wrap">
-                <div class="cases">
-                    <article class="case case--card reveal">
-                        <div class="case-art case-art--indic" aria-hidden="true">
-                            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
-                                <g class="wave">
-                                    <path d="M0 120 Q 25 40 50 120 T 100 120 T 150 120 T 200 120 T 250 120 T 300 120 T 350 120 T 400 120"/>
-                                    <path d="M0 120 Q 25 80 50 120 T 100 120 T 150 120 T 200 120 T 250 120 T 300 120 T 350 120 T 400 120"/>
-                                    <path d="M0 120 Q 25 180 50 120 T 100 120 T 150 120 T 200 120 T 250 120 T 300 120 T 350 120 T 400 120"/>
-                                </g>
-                                <text x="28" y="56">हिन्दी</text>
-                                <text x="168" y="212">বাংলা</text>
-                                <text x="292" y="60">मराठी</text>
-                            </svg>
-                        </div>
-                        <div class="case-body">
-                            <p class="case-meta"><span class="case-letter">B</span><span>YellowSense</span><span>2024</span></p>
-                            <h3 class="case-title-sm">Generative AI for Indic languages</h3>
-                            <p>LLMs with speech-to-text and text-to-speech for Hindi, Bengali and Marathi, paired with an AI-driven recommendation engine for household services.</p>
-                            <ul class="tags"><li>Generative AI</li><li>LLM</li><li>TTS / STT</li><li>RecSys</li><li>Backend</li></ul>
-                            <p class="case-link case-link--muted">Private codebase</p>
-                        </div>
-                    </article>
-
-                    <a class="case case--card case--link reveal" href="https://github.com/THEIOTGUY/TherapyLLM" target="_blank" rel="noopener">
-                        <div class="case-art case-art--chat" aria-hidden="true">
-                            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
-                                <g class="bubbles">
-                                    <rect x="36" y="38" width="190" height="42" rx="21"/>
-                                    <rect x="176" y="100" width="190" height="42" rx="21" class="accent"/>
-                                    <rect x="36" y="162" width="130" height="42" rx="21"/>
-                                </g>
-                                <g class="dots">
-                                    <circle cx="192" cy="183" r="5"/><circle cx="212" cy="183" r="5"/><circle cx="232" cy="183" r="5"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="case-body">
-                            <p class="case-meta"><span class="case-letter">C</span><span>Exhibited at IETE</span><span>2023</span></p>
-                            <h3 class="case-title-sm">Therapy-LLM</h3>
-                            <p>A real-time therapy assistant that pairs Llama 2-7B with a fine-tuned model to give empathetic, human-like responses for mental-health support.</p>
-                            <ul class="tags"><li>Python</li><li>PyTorch</li><li>Llama 2</li><li>Fine-tuning</li></ul>
-                            <p class="case-link">View on GitHub <span class="arr" aria-hidden="true">↗</span></p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills -->
-        <section class="section" id="skills">
-            <div class="wrap grid">
-                <header class="sec-label reveal">
-                    <p class="idx">04</p>
-                    <p>Skills</p>
-                </header>
-
-                <div class="sec-body">
-                    <h2 class="display sec-title reveal">The <em>toolkit</em>.</h2>
-
-                    <div class="skills">
-                        <div class="skill reveal">
-                            <h3>AI / ML</h3>
-                            <ul><li>Large language models</li><li>Training &amp; fine-tuning</li><li>NLP &amp; speech (TTS / STT)</li><li>PyTorch</li><li>OpenCV</li></ul>
-                        </div>
-                        <div class="skill reveal">
-                            <h3>Robotics &amp; vision</h3>
-                            <ul><li>Computer vision</li><li>3D Gaussian Splatting</li><li>360° / omnidirectional vision</li><li>Obstacle detection</li></ul>
-                        </div>
-                        <div class="skill reveal">
-                            <h3>Backend &amp; data</h3>
-                            <ul><li>API &amp; backend development</li><li>Python</li><li>Pandas · NumPy</li><li>SQL</li><li>Data analysis</li></ul>
-                        </div>
-                        <div class="skill reveal">
-                            <h3>Platforms</h3>
-                            <ul><li>Google Cloud Platform</li><li>Firebase</li><li>Git &amp; GitHub</li><li>Tableau</li><li>Power BI</li></ul>
-                        </div>
-                    </div>
-
-                    <h3 class="sub-head reveal">Certifications</h3>
-                    <ul class="certs">
-                        <li class="reveal"><span class="cert-name">GATE 2024 — Data Science &amp; AI (Qualified)</span><span class="cert-src">IISc Bangalore</span></li>
-                        <li class="reveal"><span class="cert-name">Big Data &amp; Machine Learning Fundamentals</span><span class="cert-src">Google Cloud</span></li>
-                        <li class="reveal"><span class="cert-name">Perform Foundational Infrastructure Tasks</span><span class="cert-src">Google Cloud</span></li>
-                        <li class="reveal"><span class="cert-name">Introduction to Artificial Intelligence</span><span class="cert-src">Coursera</span></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact -->
-        <section class="section contact" id="contact">
-            <div class="wrap">
-                <p class="sec-label sec-label--inline reveal"><span class="idx">05</span>Contact</p>
-                <h2 class="display contact-title reveal">Have an idea worth <em>building</em>? Let's talk.</h2>
-                <p class="contact-note reveal">I'm open to new projects, research collaborations and opportunities.</p>
-
-                <div class="contact-mail reveal">
-                    <a class="mail" href="mailto:vaidandeayush.av@gmail.com">vaidandeayush.av<wbr>@gmail.com<span class="arr" aria-hidden="true">→</span></a>
-                    <button class="btn btn-line btn-sm" id="copy-email" type="button" data-email="vaidandeayush.av@gmail.com">Copy</button>
-                </div>
-
-                <ul class="socials reveal">
-                    <li><a href="https://www.linkedin.com/in/ayush-vaidande-383998218/" target="_blank" rel="noopener"><span>LinkedIn</span><span aria-hidden="true">↗</span></a></li>
-                    <li><a href="https://github.com/THEIOTGUY" target="_blank" rel="noopener"><span>GitHub</span><span aria-hidden="true">↗</span></a></li>
-                    <li><a href="https://drive.google.com/file/d/1cmyNAwaTPMI711NV79v79b0C638KyBhz/view?usp=sharing" target="_blank" rel="noopener"><span>Résumé</span><span aria-hidden="true">↗</span></a></li>
-                </ul>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="wrap footer-inner">
-            <p>© <span id="year">2026</span> Ayush Vaidande</p>
-            <p class="colophon">Set in Instrument Serif, Inter Tight &amp; JetBrains Mono. Fig. 1 is rendered live as Gaussian splats.</p>
-            <a href="#top">Back to top ↑</a>
-        </div>
-    </footer>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-    <script src="js/splatmap.js"></script>
-    <script src="js/main.js"></script>
+  <section class="section contact" id="contact" aria-labelledby="contact-head"><div class="wrap"><p class="sec-label reveal"><span class="idx">06 /</span><span>CONTACT</span></p><h2 class="display contact-title reveal" id="contact-head">Let's build<br>something <em>useful.</em></h2><p class="contact-note reveal">Interested in an AI research collaboration, internship, or engineering opportunity? I'd be glad to talk.</p><div class="contact-mail reveal"><a class="mail" href="mailto:s25165@students.iitmandi.ac.in">s25165@students.<wbr>iitmandi.ac.in <span aria-hidden="true">↗</span></a><button class="btn btn-line" id="copy-email" type="button" data-email="s25165@students.iitmandi.ac.in">Copy email</button></div><div class="socials reveal"><a href="https://github.com/THEIOTGUY" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/ayush-vaidande-383998218/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://drive.google.com/file/d/1GcUx9p0rFMbqdpmThmN70M3OXyEjYob3/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">Résumé ↗</a><a href="mailto:vaidandeayush.av@gmail.com">Personal email ↗</a></div></div></section>
+</main>
+<footer class="site-footer"><div class="wrap footer-inner"><span>© <span id="year">2026</span> Ayush Vaidande.</span><span>Designed for curiosity. Built for the web.</span><a href="#top">Back to top ↑</a></div></footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="js/splatmap.js"></script><script src="js/main.js"></script>
 </body>
 </html>

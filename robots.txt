@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://theiotguy.github.io/portfolio/sitemap.xml
