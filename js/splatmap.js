@@ -8,7 +8,14 @@
  * transform (Cholesky factor of the 2D covariance). The same splats are also
  * projected into an equirectangular image to show what the 360° camera sees.
  */
-window.createSplatScene = function (mapCanvas, camCanvas, hud, reduceMotion) {
+window.createSplatScene = function (mapCanvas, camCanvas, hud = {}, reduceMotion = false) {
+    if (!mapCanvas) return null;
+    const mctx = mapCanvas.getContext('2d');
+    if (!mctx) return null;
+    const cctx = camCanvas ? camCanvas.getContext('2d') : null;
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const toggleButton = document.getElementById('map-toggle');
+    const resetButton = document.getElementById('map-reset');
     const TAU = Math.PI * 2;
     const REVEAL = 2.8;   // radius (m) around the robot that gets mapped
     const LAP = 30;       // seconds per figure-eight; the map resets each lap
@@ -157,14 +164,12 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud, reduceMotion) {
     refreshColors();
 
     // ---------------------------------------------------------------- canvases
-    const mctx = mapCanvas.getContext('2d');
-    const cctx = camCanvas ? camCanvas.getContext('2d') : null;
     let MW = 0, MH = 0, CW = 0, CH = 0, dpr = 1;
     function resize() {
         dpr = Math.min(window.devicePixelRatio || 1, 1.75);
         const m = mapCanvas.getBoundingClientRect();
         MW = m.width; MH = m.height;
-        mapCanvas.width = Math.round(MW * dpr); mapCanvas.height = Math.round(MH * dpr);
+        mapCanvas.width = Math.max(1, Math.round(MW * dpr)); mapCanvas.height = Math.max(1, Math.round(MH * dpr));
         if (camCanvas) {
             const c = camCanvas.getBoundingClientRect();
             CW = c.width; CH = c.height;
@@ -506,65 +511,146 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud, reduceMotion) {
     function renderAll() { renderMap(); renderCam(); updateHud(); }
 
     // ---------------------------------------------------------------- interaction
-    let dragging = false, lastX = 0, lastY = 0;
-    mapCanvas.addEventListener('pointerdown', (e) => {
-        dragging = true; lastX = e.clientX; lastY = e.clientY;
-        mapCanvas.setPointerCapture(e.pointerId);
-    });
-    mapCanvas.addEventListener('pointermove', (e) => {
-        if (!dragging) return;
-        userYaw -= (e.clientX - lastX) * 0.006;
-        userPitch = Math.max(-0.3, Math.min(0.55, userPitch + (e.clientY - lastY) * 0.004));
-        lastX = e.clientX; lastY = e.clientY;
+    // Vertical touch gestures remain available for scrolling the page.
+    mapCanvas.style.touchAction = 'pan-y';
+    let dragging = false, lastX = 0, lastY = 0, pointerId = null;
+    const onPointerDown = (event) => {
+        if (!event.isPrimary || (event.pointerType === 'mouse' && event.button !== 0)) return;
+        dragging = true;
+        pointerId = event.pointerId;
+        lastX = event.clientX;
+        lastY = event.clientY;
+        mapCanvas.setPointerCapture(event.pointerId);
+    };
+    const onPointerMove = (event) => {
+        if (!dragging || event.pointerId !== pointerId) return;
+        userYaw -= (event.clientX - lastX) * 0.006;
+        // Touch controls only orbit horizontally; vertical gestures scroll.
+        if (event.pointerType !== 'touch') {
+            userPitch = Math.max(-0.3, Math.min(0.5, userPitch + (event.clientY - lastY) * 0.004));
+        }
+        lastX = event.clientX;
+        lastY = event.clientY;
         if (!running) renderAll();
-    });
-    const endDrag = () => { dragging = false; };
+    };
+    const endDrag = () => { dragging = false; pointerId = null; };
+    const resetView = () => {
+        userYaw = 0;
+        userPitch = 0;
+        if (!running) renderAll();
+    };
+    const onKeyDown = (event) => {
+        if (event.altKey || event.ctrlKey || event.metaKey) return;
+        switch (event.key) {
+            case 'ArrowLeft': userYaw -= 0.12; break;
+            case 'ArrowRight': userYaw += 0.12; break;
+            case 'ArrowUp': userPitch = Math.min(0.5, userPitch + 0.08); break;
+            case 'ArrowDown': userPitch = Math.max(-0.3, userPitch - 0.08); break;
+            case 'Home': resetView(); break;
+            default: return;
+        }
+        event.preventDefault();
+        if (!running) renderAll();
+    };
+    mapCanvas.addEventListener('pointerdown', onPointerDown);
+    mapCanvas.addEventListener('pointermove', onPointerMove);
     mapCanvas.addEventListener('pointerup', endDrag);
     mapCanvas.addEventListener('pointercancel', endDrag);
+    mapCanvas.addEventListener('lostpointercapture', endDrag);
+    mapCanvas.addEventListener('keydown', onKeyDown);
+    resetButton?.addEventListener('click', resetView);
 
     // ---------------------------------------------------------------- loop
-    let running = false, rafId = 0, last = 0, visible = false;
+    let running = false, paused = Boolean(reduceMotion || motionPreference.matches);
+    let rafId = 0, last = 0, lastStep = 0, visible = false;
+    const frameInterval = 1000 / 30;
     function frame(now) {
-        const dt = Math.min(0.05, (now - last) / 1000 || 0);
-        last = now;
-        step(dt);
-        renderMap();
-        renderCam();
-        if ((hudTimer += dt) > 0.1) { hudTimer = 0; updateHud(); }
+        if (!running) return;
+        const elapsed = now - last;
+        // Thirty frames per second is sufficient for this illustrative scene.
+        if (elapsed >= frameInterval) {
+            const dt = Math.min(0.08, (now - lastStep) / 1000);
+            lastStep = now;
+            last = now - (elapsed % frameInterval);
+            step(dt);
+            renderMap();
+            renderCam();
+            if ((hudTimer += dt) > 0.15) { hudTimer = 0; updateHud(); }
+        }
         rafId = requestAnimationFrame(frame);
     }
     const start = () => {
-        if (running || reduceMotion || !visible || document.hidden) return;
+        if (running || paused || !visible || document.hidden) return;
         running = true;
-        last = performance.now();
+        last = lastStep = performance.now();
         rafId = requestAnimationFrame(frame);
     };
     const stop = () => { running = false; cancelAnimationFrame(rafId); };
+    const updateControls = () => {
+        if (!toggleButton) return;
+        toggleButton.setAttribute('aria-pressed', String(paused));
+        toggleButton.setAttribute('aria-label', paused ? 'Resume map animation' : 'Pause map animation');
+        const label = toggleButton.querySelector('[data-map-label]') || toggleButton.querySelector('span');
+        if (label) label.textContent = paused ? 'Resume' : 'Pause';
+        else toggleButton.textContent = paused ? 'Resume' : 'Pause';
+    };
+    const onToggle = () => {
+        paused = !paused;
+        paused ? stop() : start();
+        updateControls();
+    };
+    toggleButton?.addEventListener('click', onToggle);
 
     resize();
-    if (reduceMotion) {
-        // Static frame: a finished map part-way round the loop
+    if (paused) {
+        // A complete static map makes the sketch useful without animation.
         simT = LAP * 0.3;
         lap = 0;
         const [x, z] = pathAt(0.3), [hx, hz] = headingAt(0.3);
         robot = { x, z, hx, hz, u: 0.3 };
-        for (const sp of splats) sp.seen = 1;
-        for (const ob of obstacles) ob.detect = 1;
+        for (const splat of splats) splat.seen = 1;
+        for (const obstacle of obstacles) obstacle.detect = 1;
     } else {
-        step(0);
+        // Pre-roll once so the first frame already contains a legible map.
+        for (let i = 0; i < 80; i++) step(0.1);
     }
     renderAll();
+    updateControls();
+
+    const onMotionChange = (event) => {
+        paused = event.matches;
+        paused ? stop() : start();
+        updateControls();
+    };
+    motionPreference.addEventListener('change', onMotionChange);
+    const onVisibilityChange = () => { document.hidden ? stop() : start(); };
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     const ro = new ResizeObserver(() => { resize(); if (!running) renderAll(); });
     ro.observe(mapCanvas);
     if (camCanvas) ro.observe(camCanvas);
-    new IntersectionObserver(([entry]) => {
+    const io = new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting;
         visible ? start() : stop();
-    }).observe(mapCanvas);
-    document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+    });
+    io.observe(mapCanvas);
 
     return {
-        refreshColors() { refreshColors(); if (!running) renderAll(); }
+        refreshColors() { refreshColors(); if (!running) renderAll(); },
+        destroy() {
+            stop();
+            io.disconnect();
+            ro.disconnect();
+            motionPreference.removeEventListener('change', onMotionChange);
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+            toggleButton?.removeEventListener('click', onToggle);
+            resetButton?.removeEventListener('click', resetView);
+            mapCanvas.removeEventListener('pointerdown', onPointerDown);
+            mapCanvas.removeEventListener('pointermove', onPointerMove);
+            mapCanvas.removeEventListener('pointerup', endDrag);
+            mapCanvas.removeEventListener('pointercancel', endDrag);
+            mapCanvas.removeEventListener('lostpointercapture', endDrag);
+            mapCanvas.removeEventListener('keydown', onKeyDown);
+        }
     };
 };
