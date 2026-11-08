@@ -186,7 +186,7 @@
         splats: $('#hud-splats'), obs: $('#hud-obs'), pose: $('#hud-pose'), time: $('#hud-time'),
         coverage: $('#hud-coverage'), progress: $('#map-progress'), status: $('#map-status')
       }, motionPreference.matches);
-      if (mapScene) $('.map-controls').hidden = false;
+      // Controls are enabled after the dataset has loaded.
     } catch (error) {
       console.warn('The research illustration is unavailable.', error);
       $('#map-caption').textContent = 'Research across robot perception, semantic maps, and language-guided navigation. Explore the projects below.';
