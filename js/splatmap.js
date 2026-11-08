@@ -16,6 +16,9 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud = {}, reduceMotion
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
     const toggleButton = document.getElementById('map-toggle');
     const resetButton = document.getElementById('map-reset');
+    const replayButton = document.getElementById('map-replay');
+    const viewButtons = [...document.querySelectorAll('[data-map-view]')];
+    let viewMode = 'orbit';
     const TAU = Math.PI * 2;
     const REVEAL = 2.8;   // radius (m) around the robot that gets mapped
     const LAP = 30;       // seconds per figure-eight; the map resets each lap
@@ -236,11 +239,12 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud = {}, reduceMotion
         ctx.clearRect(0, 0, W, H);
         if (!W || !H) return;
 
-        const yaw = 0.35 * Math.sin(simT * 0.09) + userYaw;
-        const pitch = Math.max(0.3, Math.min(1.2, 0.7 + userPitch));
-        const dist = 12.5, F = Math.min(W * (W < 600 ? 0.84 : 0.74), H * 1.55), ox = W / 2, oy = H / 2 + H * 0.03;
+        const following = viewMode === 'follow';
+        const yaw = (following ? Math.atan2(robot.hx, robot.hz) + Math.PI : viewMode === 'top' ? 0 : 0.35 * Math.sin(simT * 0.09)) + userYaw;
+        const pitch = viewMode === 'top' ? 1.48 : Math.max(0.3, Math.min(1.2, 0.7 + userPitch));
+        const dist = following ? 8.5 : 12.5, F = Math.min(W * (W < 600 ? 0.84 : 0.74), H * 1.55), ox = W / 2, oy = H / 2 + H * 0.03;
         const cp = Math.cos(pitch), sp = Math.sin(pitch), cy = Math.cos(yaw), sy = Math.sin(yaw);
-        const Cx = dist * cp * sy, Cy = dist * sp, Cz = dist * cp * cy;
+        const Cx = dist * cp * sy + (following ? robot.x : 0), Cy = dist * sp, Cz = dist * cp * cy + (following ? robot.z : 0);
         const fx = -cp * sy, fy = -sp, fz = -cp * cy;
         let rx = -fz, rz = fx; const rl = Math.hypot(rx, rz); rx /= rl; rz /= rl;
         const ux = -rz * fy, uy = rz * fx - rx * fz, uz = rx * fy;
@@ -383,6 +387,40 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud = {}, reduceMotion
         for (const s of rs) drawProjected(s, s.alpha, sprites[s.color]);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.globalAlpha = 1;
+
+        // A crisp camera mast makes the robot legible above the Gaussian map.
+        ctx.beginPath();
+        [[-0.25, -0.18], [0.25, -0.18], [0.25, 0.18], [-0.25, 0.18]].forEach(([forward, side], i) => {
+            if (project(rX + forward * hx - side * hz, 0.23, rZ + forward * hz + side * hx)) {
+                ctx[i ? 'lineTo' : 'moveTo'](P[0], P[1]);
+            }
+        });
+        ctx.closePath(); ctx.fillStyle = palette[INK]; ctx.fill();
+        ctx.strokeStyle = palette[5]; ctx.lineWidth = 1; ctx.stroke();
+        ctx.strokeStyle = palette[INK];
+        ctx.lineWidth = 2;
+        if (project(rX, 0.2, rZ)) {
+            const bx = P[0], by = P[1];
+            if (project(rX, CAM_H, rZ)) {
+                ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(P[0], P[1]); ctx.stroke();
+                ctx.fillStyle = palette[ACCENT];
+                ctx.beginPath(); ctx.arc(P[0], P[1], 4, 0, TAU); ctx.fill();
+                ctx.font = '500 9px ui-monospace, monospace';
+                ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+                const labelX = Math.max(55, Math.min(W - 55, P[0]));
+                const labelY = Math.max(58, P[1] - 13);
+                ctx.fillStyle = palette[5]; ctx.fillRect(labelX - 49, labelY - 14, 98, 19);
+                ctx.fillStyle = palette[INK]; ctx.fillText('ROBOT / 360°', labelX, labelY);
+            }
+        }
+        ctx.font = '500 9px ui-monospace, monospace';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+        for (const ob of obstacles) {
+            if (ob.detect < 0.5 || !project(ob.cx, 0.02, ob.cz)) continue;
+            if (P[0] < 24 || P[0] > W - 24 || P[1] < 50 || P[1] > H - 40) continue;
+            ctx.fillStyle = palette[INK2];
+            ctx.fillText(ob.name.toUpperCase(), P[0], P[1] + 13);
+        }
     }
 
     // ---------------------------------------------------------------- 360° camera view
@@ -403,7 +441,7 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud = {}, reduceMotion
             const dx = s.x - cx, dy = s.y - CAM_H, dz = s.z - cz;
             const a = dx * hx + dz * hz, b = -dx * hz + dz * hx;
             const rho2 = a * a + b * b, d2 = rho2 + dy * dy;
-            if (d2 < 0.15) continue;
+            if (d2 < 0.15 || rho2 < 0.0001) continue;
             const rho = Math.sqrt(rho2), az = Math.atan2(b, a), el = Math.atan2(dy, rho);
             const [px, py] = toPx(az, el);
             if (py < -30 || py > H + 30) continue;
@@ -502,6 +540,10 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud = {}, reduceMotion
         const obs = obstacles.filter(o => o.detect > 0.5).length;
         if (hud.splats) hud.splats.textContent = n.toLocaleString();
         if (hud.obs) hud.obs.textContent = `${obs} / ${obstacles.length}`;
+        const coverage = Math.round(100 * n / splats.length);
+        if (hud.coverage) hud.coverage.textContent = `${coverage}%`;
+        if (hud.progress) hud.progress.value = coverage;
+        if (hud.status) hud.status.textContent = paused ? 'Paused' : 'Mapping';
         const deg = Math.round(Math.atan2(robot.hz, robot.hx) * 180 / Math.PI);
         if (hud.pose) hud.pose.textContent = `${robot.x.toFixed(2)}, ${robot.z.toFixed(2)} · ${deg}°`;
         const lt = simT - Math.max(0, lap) * LAP;
@@ -537,8 +579,27 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud = {}, reduceMotion
     const resetView = () => {
         userYaw = 0;
         userPitch = 0;
+        viewMode = 'orbit';
+        updateViewButtons();
         if (!running) renderAll();
     };
+    const updateViewButtons = () => viewButtons.forEach(button => {
+        button.setAttribute('aria-pressed', String(button.dataset.mapView === viewMode));
+    });
+    const onViewChange = event => {
+        viewMode = event.currentTarget.dataset.mapView;
+        userYaw = userPitch = 0;
+        updateViewButtons();
+        renderAll();
+    };
+    const replay = () => {
+        simT = 0;
+        lap = -1;
+        step(0);
+        renderAll();
+    };
+    viewButtons.forEach(button => button.addEventListener('click', onViewChange));
+    replayButton?.addEventListener('click', replay);
     const onKeyDown = (event) => {
         if (event.altKey || event.ctrlKey || event.metaKey) return;
         switch (event.key) {
@@ -587,6 +648,7 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud = {}, reduceMotion
     };
     const stop = () => { running = false; cancelAnimationFrame(rafId); };
     const updateControls = () => {
+        if (hud.status) hud.status.textContent = paused ? 'Paused' : 'Mapping';
         if (!toggleButton) return;
         toggleButton.setAttribute('aria-pressed', String(paused));
         toggleButton.setAttribute('aria-label', paused ? 'Resume map animation' : 'Pause map animation');
@@ -645,6 +707,8 @@ window.createSplatScene = function (mapCanvas, camCanvas, hud = {}, reduceMotion
             document.removeEventListener('visibilitychange', onVisibilityChange);
             toggleButton?.removeEventListener('click', onToggle);
             resetButton?.removeEventListener('click', resetView);
+            replayButton?.removeEventListener('click', replay);
+            viewButtons.forEach(button => button.removeEventListener('click', onViewChange));
             mapCanvas.removeEventListener('pointerdown', onPointerDown);
             mapCanvas.removeEventListener('pointermove', onPointerMove);
             mapCanvas.removeEventListener('pointerup', endDrag);

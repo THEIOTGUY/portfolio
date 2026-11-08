@@ -136,6 +136,31 @@ strong { font-weight: 600; color: var(--ink); }
 .readout dt { font: 8px var(--mono); color: var(--ink-3); }
 .readout dd { margin-top: 6px; font: 10px/1.4 var(--mono); white-space: nowrap; }
 .hero-figure figcaption { color: var(--ink-3); font-size: 10px; line-height: 1.65; margin-top: 11px; max-width: 440px; }
+.scene-views { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; padding: 0 12px; background: var(--bg-elev); border: 1px solid var(--rule); border-bottom: 0; font: 8px/1.6 var(--mono); color: var(--ink-2); }
+.scene-views > div { display: flex; gap: 3px; }
+.scene-views button { min-height: 44px; padding: 8px 10px; background: transparent; border: 0; color: var(--ink-2); font: 9px var(--mono); }
+.scene-views button[aria-pressed='true'] { color: var(--accent); box-shadow: inset 0 -2px var(--accent); }
+.hero-figure .fig-frame { height: clamp(270px, 24vw, 340px); }
+.sim-state { color: var(--accent); text-transform: uppercase; }
+.panorama-panel { background: var(--bg-elev); border: 1px solid var(--rule); border-top: 0; overflow: hidden; }
+.panorama-heading { display: flex; justify-content: space-between; gap: 8px; padding: 12px 12px 0; font: 8px/1.5 var(--mono); color: var(--ink-2); }
+.panorama-heading > span:last-child { color: var(--ink-3); }
+#camera-canvas { width: 100%; height: 108px; display: block; }
+.mapping-progress { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); color: var(--ink-2); font: 9px var(--mono); }
+.mapping-progress > span { white-space: nowrap; }
+.mapping-progress strong { color: var(--ink); margin-left: 6px; font-weight: 500; }
+.mapping-progress progress { flex: 1; min-width: 0; height: 3px; border: 0; appearance: none; background: var(--rule); color: var(--accent); accent-color: var(--accent); }
+.mapping-progress progress::-webkit-progress-bar { background: var(--rule); }
+.mapping-progress progress::-webkit-progress-value { background: var(--accent); }
+.mapping-progress progress::-moz-progress-bar { background: var(--accent); }
+@media (max-width: 900px) and (min-width: 681px) {
+  .scene-views { padding-inline: 8px; gap: 0; }.scene-views button { padding-inline: 8px; }
+  .scene-views > span { width: 100%; padding-top: 8px; }.panorama-heading { font-size: 7px; }
+}
+@media (max-width: 400px) {
+  .scene-views { padding-inline: 8px; }.scene-views button { padding-inline: 7px; font-size: 8px; }
+  .panorama-heading { font-size: 7px; }.hero-figure .map-toolbar { flex-wrap: wrap; gap: 0; padding-top: 10px; }
+}
 /* Section layout uses generous margins and precise rules. */
 .section { padding-top: clamp(88px, 9vw, 140px); }
 .grid { display: grid; grid-template-columns: 22% minmax(0, 1fr); gap: 40px; }

@@ -182,8 +182,9 @@
   const canvas = $('#map-canvas');
   if (canvas && typeof window.createSplatScene === 'function') {
     try {
-      mapScene = window.createSplatScene(canvas, null, {
-        splats: $('#hud-splats'), obs: $('#hud-obs'), pose: $('#hud-pose'), time: $('#hud-time')
+      mapScene = window.createSplatScene(canvas, $('#camera-canvas'), {
+        splats: $('#hud-splats'), obs: $('#hud-obs'), pose: $('#hud-pose'), time: $('#hud-time'),
+        coverage: $('#hud-coverage'), progress: $('#map-progress'), status: $('#map-status')
       }, motionPreference.matches);
       if (mapScene) $('.map-controls').hidden = false;
     } catch (error) {
