@@ -34,3 +34,15 @@ node --check js/splatmap.js
 ```
 
 Check the site at phone, tablet, and desktop widths in both themes. Verify project filters, mobile menu keyboard behavior, canvas controls, résumé links, and contact actions. GitHub Pages publishes changes pushed to `main`.
+
+
+### Dataset replay controls
+
+The homepage uses the King’s Hall scan with 69 pre-rendered panoramic captures.
+The route slider pauses at a selected metric position; Resume continues from there.
+Playback supports 0.5×, 1× and 2× speed, a full-scan display, and orbit/top/follow views.
+Adjacent camera captures are blended and buffered so loading does not blank the view.
+Reduced-motion preferences start playback paused. Desktop and 390 px layouts were checked.
+
+Run route geometry and endpoint checks with `node --test tests/route-playback.test.mjs`.
+Source credits and simulation limitations are in `assets/dataset/ATTRIBUTION.md`.

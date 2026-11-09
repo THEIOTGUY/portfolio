@@ -7,10 +7,11 @@ window.createSplatScene = function (map, camera, hud, reduceMotion) {
   const observer = new IntersectionObserver(entries => {
     if (!entries.some(e => e.isIntersecting)) return;
     observer.disconnect();
-    import('./dataset-scene.js?v=20261109-scan').then(async module => {
+    import('./dataset-scene.js?v=20261110-replay').then(async module => {
       scene = await module.createDatasetScene(map, camera, hud, reduceMotion);
       if (disposed) { scene.destroy(); return; }
       document.querySelector('.map-controls').hidden = false;
+      document.querySelector('.replay-controls').hidden = false;
       viewButtons.forEach(button => button.disabled = false);
     }).catch(error => {
       console.warn('Scan could not be loaded', error);
